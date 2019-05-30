@@ -2,6 +2,9 @@
   Username: <%= f.text_field :name %><br />
   Password: <%= f.password_field :password %><br />
   Confirm Password: <%= f.password_field :password_confirmation %><br />
+  <% if @user.avatar.attached? %>
+    <%= image_tag url_for(@user.avatar), class: 'avatar' %><br />
+  <% end %>
   Image: <%= f.file_field :avatar %><br />
   <%= f.submit button_name %>
 <% end %>

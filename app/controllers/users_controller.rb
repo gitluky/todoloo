@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_action :set_user, only: [:edit, :show, :update]
   def new
     @user = User.new
   end
@@ -14,19 +15,28 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: params[:id])
+
 
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+
   end
 
   def update
-    @user = User.find_by(id: params[:id])
+    [:password, :password_confirmation, :avatar].each {|x| params.delete(x) if x.blank?}
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render edit_user_path(@user), flash: { message: 'Update failed.'}
+    end
   end
 
   private
+
+  def set_user
+    @user = User.find_by(id: params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation, :avatar)
