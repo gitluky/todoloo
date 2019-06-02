@@ -17,8 +17,10 @@ class User < ApplicationRecord
       u.name = oauth_hash['info']['name']
       u.provider = oauth_hash['info']['provider']
       u.password = SecureRandom.hex
-      avatar_image = open(oauth_hash['info']['image']+'?type=large')
-      u.avatar.attach(io: avatar_image, filename: 'avatar_#{user.id}.jpg', content_type: avatar_image.content_type)
     end
+    avatar_image = open(oauth_hash['info']['image']+'?type=large')
+    user.avatar.attach(io: avatar_image, filename: "avatar_#{user.id}.jpg", content_type: avatar_image.content_type)
+    user.save
+    user
   end
 end
