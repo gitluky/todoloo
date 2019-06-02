@@ -31,3 +31,6 @@
 /config/master.key
 
 notes.txt
+
+#Ignore .env fil
+*.env

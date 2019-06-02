@@ -7,7 +7,10 @@
   <div class="form-group">
     <%= label_tag :password %>
     <%= password_field_tag :password, nil, class: 'form-control', id: 'password' %><br />
+    <%= link_to('Log in with Facebook!', '/auth/facebook') %><br />
   </div>
+
 <%= submit_tag 'Login' %>
+
 <% end %>
 <div>

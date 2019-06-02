@@ -1,3 +1,4 @@
+require 'open-uri'
 class User < ApplicationRecord
   has_many :tasks
   has_many :announcments
@@ -10,4 +11,14 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def self.find_or_create_by_oauth(oauth_hash)
+    user = User.find_or_create_by(email: oauth_hash['email']) do |u|
+      u.uid = oauth_hash['uid']
+      u.name = oauth_hash['info']['name']
+      u.provider = oauth_hash['info']['provider']
+      u.password = SecureRandom.hex
+      avatar_image = open(oauth_hash['info']['image']+'?type=large')
+      u.avatar.attach(io: avatar_image, filename: 'avatar_#{user.id}.jpg', content_type: avatar_image.content_type)
+    end
+  end
 end

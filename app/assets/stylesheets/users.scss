@@ -2,8 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.avatar {
+
+.avatar-small {
   height: 100px;
   width: 100px;
+  border-radius: 15px;
+}
+.avatar-large {
+  height: 200px;
+  width: 200px;
   border-radius: 15px;
 }
