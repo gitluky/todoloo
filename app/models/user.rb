@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :groups, through: :groups_users
   has_one_attached :avatar
 
+  validates :email, uniqueness: true
+
   has_secure_password
 
 end
