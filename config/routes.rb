@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   resources :tasks
   resources :announcements
   resources :invitations
-  resources :groups
+
+  resources :groups do
+    resources :invitations
+    resources :tasks
+    resources :announcements
+  end
+  
   resources :users
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
