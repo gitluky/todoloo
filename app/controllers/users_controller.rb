@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
   def edit
 
-
   end
 
   def show
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
-      render edit_user_path(@user), flash: { message: 'Update failed.'}
+      render :edit, flash: { message: 'Update failed.'}
     end
   end
 

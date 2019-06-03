@@ -1,0 +1,7 @@
+<%= form_for group do |f| %>
+  Name: <%= f.text_field :name %>
+  Description: <%= f.text_area :description%>
+  <%= image_tag url_for(group.image), class: 'group-banner' if group.image.attached? %><br />
+  Image: <%= f.file_field :image %>
+  <%= f.submit %>
+<% end %>

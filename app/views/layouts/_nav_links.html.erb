@@ -1,13 +1,13 @@
 <ul class="mt-3 nav justify-content-center">
   <% if logged_in? %>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
+      <a class="nav-link active" href="<%= root_path %>">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="<%= user_path(current_user) %>">My Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="<%= new_group_path %>">Create Group</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<%= logout_path %>">Log Out</a>

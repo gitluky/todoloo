@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_many :announcments
   has_many :recieved_invitations, class_name: "Invitation", foreign_key: 'recipient_id'
   has_many :sent_invitations, class_name: "Invitation", foreign_key: 'sender_id'
-  has_many :groups, through: :groups_users
+  has_many :memberships
+  has_many :groups, through: :memberships
   has_one_attached :avatar
 
   validates :email, uniqueness: true
@@ -12,10 +13,10 @@ class User < ApplicationRecord
   has_secure_password
 
   def self.find_or_create_by_oauth(oauth_hash)
-    user = User.find_or_create_by(email: oauth_hash['email']) do |u|
+    user = User.find_or_create_by(email: oauth_hash['info']['email']) do |u|
       u.uid = oauth_hash['uid']
       u.name = oauth_hash['info']['name']
-      u.provider = oauth_hash['info']['provider']
+      u.provider = oauth_hash['provider']
       u.password = SecureRandom.hex
     end
     avatar_image = open(oauth_hash['info']['image']+'?type=large')
