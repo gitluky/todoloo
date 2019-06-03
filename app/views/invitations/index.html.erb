@@ -1,0 +1,4 @@
+<%= @invitations.each do |invitation| %>
+  Sent to: <%= invitation.recipient_id %><br />
+  Sent By: <%= invitation.sender_id %><br />
+<% end %>

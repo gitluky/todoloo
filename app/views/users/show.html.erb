@@ -2,3 +2,16 @@
 <%= @user.name %>
 <%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Delete Account', user_path(@user), method: 'delete'%>
+
+<%= @invitations.each do |invitation| %>
+  You're have been invited to: <%= invitation.group_id %><br />
+  Sent By: <%= invitation.sender_id %><br />
+  <%= form_for invitation do |f| %>
+    <%= f.hidden_field :accept, value: '1' %>
+    <%= f.submit 'Accept'%>
+  <% end %>
+  <%= form_for invitation, method: :delete do |f| %>
+    <%= f.hidden_field :accept, value: '0' %>
+    <%= f.submit 'Decline'%>
+  <% end %>
+<% end %>
