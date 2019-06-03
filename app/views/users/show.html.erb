@@ -17,3 +17,7 @@
   <% end %>
 
 <% end %>
+
+<%= @groups.each do |group| %>
+  <%= link_to group.name, group_path(group) %>
+<% end %>

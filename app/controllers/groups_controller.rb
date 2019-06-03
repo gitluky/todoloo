@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
     if @group.users.exclude?(current_user)
       redirect_to user_path(current_user)
     end
+    @invitations = @group.invitations
   end
 
   def edit
