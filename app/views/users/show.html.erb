@@ -1,3 +1,4 @@
 <%= display_avatar(@user, "large") %><br />
 <%= @user.name %>
 <%= link_to 'Edit', edit_user_path(@user) %>
+<%= link_to 'Delete Account', user_path(@user), method: 'delete'%>
