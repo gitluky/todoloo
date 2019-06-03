@@ -2,3 +2,4 @@
 <%= @group.name %>
 <%= @group.description %>
 <%= link_to 'Edit', edit_group_path(@group) %>
+<%= link_to 'Delete Group', group_path(@group), method: 'delete'%>
