@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:edit, :show, :update]
+  before_action :set_user, only: [:edit, :show, :update, :destroy]
+
   def new
     @user = User.new
   end
@@ -29,6 +30,11 @@ class UsersController < ApplicationController
     else
       render :edit, flash: { message: 'Update failed.'}
     end
+  end
+
+  def destroy
+    @user.delete
+    redirect_to login_path
   end
 
   private
