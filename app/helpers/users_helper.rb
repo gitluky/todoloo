@@ -4,7 +4,7 @@ module UsersHelper
      if user.avatar.attached?
        image_tag url_for(user.avatar), class: "avatar-#{size}"
     else
-       image_tag url_for("placeholder_banner.png"), class: "avatar-#{size}"
+       image_tag url_for("default_avatar.png"), class: "avatar-#{size}"
     end
   end
 end

@@ -3,4 +3,4 @@
 <%= @group.description %>
 <%= link_to 'Edit', edit_group_path(@group) %>
 <%= link_to 'Delete Group', group_path(@group), method: 'delete'%>
-<%= link_to 'Invite a Member', new_group_invitation_path %>
+<%= link_to 'Send Invitation', new_group_invitation_path(@group) %>

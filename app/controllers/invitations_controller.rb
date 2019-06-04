@@ -9,20 +9,18 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    @group = Group.find_by(id: params[:group_id])
-    @invitation = Invitation.create(invitation_params)
-    @invitation.group = @group
+    @invitation = Invitation.new(invitation_params)
     @invitation.sender = current_user
     if @invitation.save
-      redirect_to group_invitations_path(@group)
+      redirect_to group_invitations_path(params[:group_id])
     else
       render :new
     end
   end
 
   def destroy
-    @group = Group.find_by(id: params[:group_id])
     @invitation = Invitation.find_by(id: params[:id])
+    @group = @invitation.group
     if params[:invitation][:accept]
       @group.users << current_user
       @invitation.delete
@@ -35,7 +33,7 @@ class InvitationsController < ApplicationController
   private
 
   def invitation_params
-    params.require(:invitation).permit(:recipient_email)
+    params.require(:invitation).permit(:recipient_email, :group_id)
   end
 
 end

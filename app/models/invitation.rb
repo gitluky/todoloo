@@ -9,7 +9,7 @@ class Invitation < ApplicationRecord
     self.recipient = User.find_by(email: email)
   end
 
-  def recipient_email(email)
+  def recipient_email
     self.recipient ? self.recipient.name : nil
   end
 

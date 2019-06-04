@@ -3,11 +3,11 @@
 <%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Delete Account', user_path(@user), method: 'delete'%>
 
-<%= @invitations.each do |invitation| %>
-  You're have been invited to: <%= invitation.group_id %><br />
-  Sent By: <%= invitation.sender_id %><br />
+<% @invitations.each do |invitation| %>
+  You're have been invited to: <%= invitation.group.name %><br />
+  Sent By: <%= invitation.sender.name %><br />
 
-  <%= form_for invitation, method: delete do |f| %>
+  <%= form_for invitation, method: :delete do |f| %>
     <%= f.hidden_field :accept, value: 'true' %>
     <%= f.submit 'Accept'%>
   <% end %>
@@ -18,6 +18,6 @@
 
 <% end %>
 
-<%= @groups.each do |group| %>
+<% @groups.each do |group| %>
   <%= link_to group.name, group_path(group) %>
 <% end %>
