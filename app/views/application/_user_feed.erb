@@ -1,0 +1,24 @@
+Announcements
+Invitations
+Assigned Tasks
+Groups
+
+<% @invitations.each do |invitation| %>
+  You're have been invited to: <%= invitation.group.name %><br />
+  Sent By: <%= invitation.sender.name %><br />
+
+  <%= form_for invitation, method: :delete do |f| %>
+    <%= f.hidden_field :accept, value: 'true' %>
+    <%= f.submit 'Accept'%>
+  <% end %>
+
+  <%= form_for invitation, method: :delete do |f| %>
+    <%= f.submit 'Decline'%><br />
+  <% end %>
+
+<% end %>
+
+<% @groups.each do |group| %>
+  <%= link_to group.name, group_path(group) %>
+<% end %>
+</div>

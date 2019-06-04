@@ -1,6 +1,7 @@
 require 'open-uri'
 class User < ApplicationRecord
-  has_many :tasks
+  has_many :created_tasks, class_name: "Task", foreign_key: 'created_by_id'
+  has_many :assigned_tasks, class_name: "Task", foreign_key: 'assigned_to_id'
   has_many :announcments
   has_many :recieved_invitations, class_name: "Invitation", foreign_key: 'recipient_id'
   has_many :sent_invitations, class_name: "Invitation", foreign_key: 'sender_id'
