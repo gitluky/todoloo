@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
 
   def index
-    @invitations = Invitation.where(group_id: params[:group_id])
+
   end
 
   def new
