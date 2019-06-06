@@ -1,6 +1,7 @@
 <%= content_tag(:h1, 'ToDoLoo', class: 'text-center mt-3') %>
 <%= content_tag(:p, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', class: 'text-center mt-n2') %>
-<% if logged_in? %>
+<% if !logged_in? %>
   <%= render partial: 'carousel' %>
-  <% else %>
-  <%= render partial: 'user_feed', locals: { invitations: @invitations, groups: @groups }
+<% else %>
+  <%= render partial: 'user_feed', locals: { invitations: @invitations, groups: @groups } %>
+<% end %>

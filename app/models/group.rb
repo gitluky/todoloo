@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   has_many :tasks
-  has_many :announcments
+  has_many :announcements
   has_many :invitations
   has_many :memberships
   has_many :users, through: :memberships

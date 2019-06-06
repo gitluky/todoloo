@@ -1,24 +1,39 @@
-Announcements
-Invitations
-Assigned Tasks
-Groups
 
+<div>
+Invitations:
 <% @invitations.each do |invitation| %>
-  You're have been invited to: <%= invitation.group.name %><br />
-  Sent By: <%= invitation.sender.name %><br />
+  <div>
+    You have been invited to: <%= invitation.group.name %><br />
+    Sent By: <%= invitation.sender.name %><br />
 
-  <%= form_for invitation, method: :delete do |f| %>
-    <%= f.hidden_field :accept, value: 'true' %>
-    <%= f.submit 'Accept'%>
-  <% end %>
+    <%= form_for invitation, method: :delete do |f| %>
+      <%= f.hidden_field :accept, value: 'true' %>
+      <%= f.submit 'Accept'%>
+    <% end %>
 
-  <%= form_for invitation, method: :delete do |f| %>
-    <%= f.submit 'Decline'%><br />
-  <% end %>
-
+    <%= form_for invitation, method: :delete do |f| %>
+      <%= f.submit 'Decline'%><br />
+    <% end %>
+  </div>
 <% end %>
 
-<% @groups.each do |group| %>
-  <%= link_to group.name, group_path(group) %>
-<% end %>
+</div>
+
+
+Groups:
+<div>
+  <% @groups.each do |group| %>
+    <div>
+      <%= link_to group.name, group_path(group) %>
+    </div>
+  <% end %>
+<div>
+
+Announcements:
+<div>
+</div>
+
+
+Assigned Tasks:
+<div>
 </div>
