@@ -5,3 +5,4 @@
   Image: <%= f.file_field :image %>
   <%= f.submit %>
 <% end %>
+<%= link_to 'Delete Account', user_path(current_user), method: 'delete', class: 'dropdown-item' %>

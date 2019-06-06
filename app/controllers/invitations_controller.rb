@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
 
   def index
-
+    @invitations = current_user.received_invitations
   end
 
   def new
