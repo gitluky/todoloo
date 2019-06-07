@@ -1,0 +1,8 @@
+<h2>My Groups</h2>
+<div>
+  <% @groups.each do |group| %>
+    <div>
+      <%= link_to group.name, group_path(group) %>
+    </div>
+  <% end %>
+<div>

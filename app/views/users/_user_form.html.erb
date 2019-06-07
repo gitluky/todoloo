@@ -3,9 +3,9 @@
   Username: <%= f.text_field :name %><br />
   Password: <%= f.password_field :password %><br />
   Confirm Password: <%= f.password_field :password_confirmation %><br />
-  <%= image_tag url_for(user.avatar), class: 'avatar-large' if user.avatar.attached? %><br />
+  <%= display_avatar(current_user, 'large') %><br />
   <% if user.provider.nil? %>
-    Image: <%= f.file_field :avatar, class: 'avatar-large' %><br />
+    Image: <%= f.file_field :avatar %><br />
   <% end %>
   <%= f.submit button_name %>
 <% end %>

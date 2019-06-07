@@ -5,14 +5,16 @@ class InvitationsController < ApplicationController
   end
 
   def new
-    @invitation = Invitation.new
+    @group = Group.find_by(id: params[:group_id])
+    @invitation = @group.invitations.build
   end
 
   def create
-    @invitation = Invitation.new(invitation_params)
+    @group = Group.find_by(id: params[:group_id])
+    @invitation = @group.invitations.build(invitation_params)
     @invitation.sender = current_user
     if @invitation.save
-      redirect_to group_invitations_path(params[:group_id])
+      redirect_to group_path(@group)
     else
       render :new
     end

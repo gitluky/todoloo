@@ -10,7 +10,7 @@ module SessionsHelper
 
   def log_in(user)
     session[:user_id] = user.id
-    redirect_to user_path(user)
+    redirect_to root_path
   end
 
 end

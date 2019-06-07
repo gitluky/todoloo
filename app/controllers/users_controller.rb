@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @groups = @user.groups
-    @invitations = @user.recieved_invitations
+    @invitations = @user.received_invitations
   end
 
   def update

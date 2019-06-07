@@ -1,11 +1,12 @@
 <% if !@invitation.errors.empty? %>
   <% @invitation.errors.full_messages.each do |message| %>
-    <%= message %>
+    <div>
+      <%= message %>
+      </div>
   <% end %>
 <% end %>
 
-<%= form_for @invitation do |f| %>
-  <%= f.hidden_field :group_id, value: params[:group_id] %>
+<%= form_for([@group, @invitation]) do |f| %>
   <%= f.text_field :recipient_email %>
   <%= f.submit 'Send Invite'%>
 <% end %>
