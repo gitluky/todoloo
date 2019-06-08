@@ -1,4 +1,4 @@
-<%= form_for group do |f| %>
+<%= form_for([user, group]) do |f| %>
   Name: <%= f.text_field :name %>
   Description: <%= f.text_area :description%>
   <%= image_tag url_for(group.image), class: 'group-banner' if group.image.attached? %><br />

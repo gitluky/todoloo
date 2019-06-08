@@ -3,10 +3,12 @@
   Username: <%= f.text_field :name %><br />
   Password: <%= f.password_field :password %><br />
   Confirm Password: <%= f.password_field :password_confirmation %><br />
-  <%= display_avatar(current_user, 'large') %><br />
+  <%= display_avatar(user, 'large') %><br />
   <% if user.provider.nil? %>
     Image: <%= f.file_field :avatar %><br />
   <% end %>
   <%= f.submit button_name %>
 <% end %>
-<%= link_to 'Delete Account', user_path(current_user), method: 'delete', class: 'dropdown-item' %>
+<% if !user.new_record? %>
+  <%= link_to 'Delete Account', user_path(user), method: 'delete', class: 'dropdown-item' %>
+<% end %>
