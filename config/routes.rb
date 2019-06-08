@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :notes
   resources :tasks
   resources :announcements
-  resources :invitations
 
   resources :groups do
     resources :invitations
@@ -11,8 +10,11 @@ Rails.application.routes.draw do
     resources :announcements
   end
 
-  resources :users
-  
+  resources :users do
+    resources :invitations
+    resources :groups
+  end
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
