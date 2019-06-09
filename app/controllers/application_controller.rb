@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include GroupsHelper
 
   def index
     if logged_in?

@@ -4,15 +4,15 @@ Rails.application.routes.draw do
   resources :tasks
   resources :announcements
 
-  resources :groups, only: [:show] do
-    resources :invitations
-    resources :tasks
-    resources :announcements
-  end
-
   resources :users do
     resources :invitations
     resources :groups, only: [:index, :new, :create]
+  end
+
+  resources :groups, only: [:show, :edit] do
+    resources :invitations
+    resources :tasks
+    resources :announcements
   end
 
   get '/login', to: 'sessions#new'
