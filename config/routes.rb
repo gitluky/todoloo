@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :tasks
   resources :announcements
 
-  resources :groups do
+  resources :groups, only: [:show] do
     resources :invitations
     resources :tasks
     resources :announcements
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :invitations
-    resources :groups
+    resources :groups, only: [:index, :new, :create]
   end
 
   get '/login', to: 'sessions#new'

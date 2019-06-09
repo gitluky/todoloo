@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 
   before_action :validate_logged_in, :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :validate_current_user, only: [:index]
 
   def index
     @groups = Group.has_member(params[:user_id])
@@ -42,6 +43,12 @@ class GroupsController < ApplicationController
   def validate_logged_in
     if !logged_in?
       redirect_to login_path
+    end
+  end
+
+  def validate_current_user
+    if current_user.id != params[:user_id].to_i
+      redirect_to user_groups_url(current_user)
     end
   end
 
