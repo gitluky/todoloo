@@ -1,6 +1,11 @@
 <%= display_banner(@group) %><br />
-<%= @group.name %>
-<%= @group.description %>
-<%= link_to 'Edit', edit_group_path(@group) %>
-<%= link_to 'Delete Group', group_path(@group), method: 'delete'%>
+<%= @group.name %><br />
+<%= @group.description %><br />
+Invitations:<br />
+<% @invitations.each do |invitation| %>
+  Sent to: <%= invitation.recipient.email %><br />
+  Sent by: <%= invitation.sender.email %><br />
+<% end %>
+<%= link_to 'Edit', edit_group_path(@group) %><br />
+<%= link_to 'Delete Group', group_path(@group), method: 'delete'%><br />
 <%= link_to 'Send Invitation', new_group_invitation_path(@group) %>
