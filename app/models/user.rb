@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :sent_invitations, class_name: "Invitation", foreign_key: 'sender_id'
   has_many :memberships
   has_many :groups, through: :memberships
+  has_many :last_edited_by, class_name: "Group", foreign_key: 'last_edited_by_id'
   has_one_attached :avatar
 
   validates :email, uniqueness: true

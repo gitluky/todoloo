@@ -3,7 +3,7 @@
 <div>
   <% @groups.each do |group| %>
     <div>
-      <%= link_to group.name, user_group_path(current_user, group) %>
+      <%= link_to group.name, group_path(group) %>
     </div>
   <% end %>
 <div>
