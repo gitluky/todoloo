@@ -29,8 +29,8 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group.update(group_params)
     binding.pry
+    @group.update(group_params)
     redirect_to group_path(@group)
   end
 

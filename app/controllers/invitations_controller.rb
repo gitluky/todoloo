@@ -29,7 +29,7 @@ class InvitationsController < ApplicationController
     else
       @invitation.delete
     end
-    redirect_to user_groups_path
+    redirect_to groups_path
   end
 
   private
