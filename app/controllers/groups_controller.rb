@@ -1,23 +1,20 @@
 class GroupsController < ApplicationController
 
   before_action :validate_logged_in, :set_group, only: [:show, :edit, :update, :destroy]
-  before_action :validate_current_user, only: [:index]
 
   def index
-    @groups = Group.has_member(params[:user_id])
+    @groups = Group.has_member(current_user.id)
   end
 
   def new
-    @user = User.find_by(id: params[:user_id])
-    @group = @user.groups.build
+    @group = current_user.groups.build
   end
 
   def create
-    @user = User.find_by(id: params[:user_id])
-    @group = @user.groups.create(group_params)
-    @group.last_edited_by = @user
+    @group = current_user.groups.create(group_params)
+    @group.last_edited_by = current_user
     @group.save
-    redirect_to user_groups_path
+    redirect_to groups_path
   end
 
   def show
@@ -33,6 +30,8 @@ class GroupsController < ApplicationController
 
   def update
     @group.update(group_params)
+    binding.pry
+    redirect_to group_path(@group)
   end
 
   def destroy

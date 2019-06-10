@@ -6,10 +6,10 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :invitations
-    resources :groups, only: [:index, :new, :create]
+    # resources :groups, only: [:index, :new, :create]
   end
 
-  resources :groups, only: [:show, :edit] do
+  resources :groups do
     resources :invitations
     resources :tasks
     resources :announcements
