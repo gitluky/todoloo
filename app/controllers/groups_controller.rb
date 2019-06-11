@@ -29,14 +29,14 @@ class GroupsController < ApplicationController
   end
 
   def update
-    binding.pry
+    @group.last_edited_by = current_user
     @group.update(group_params)
     redirect_to group_path(@group)
   end
 
   def destroy
     @group.delete
-    redirect_to user_path(current_user)
+    redirect_to groups_path
   end
 
 end
