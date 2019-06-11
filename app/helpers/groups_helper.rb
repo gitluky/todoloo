@@ -14,12 +14,4 @@ module GroupsHelper
     end
   end
 
-  def set_group
-    @group = Group.find_by(id: params[:id])
-  end
-
-  def group_params
-    params.require(:group).permit(:name, :description, :image )
-  end
-
 end

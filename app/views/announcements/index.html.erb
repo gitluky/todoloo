@@ -1,0 +1,7 @@
+<%= @announcments.each do |announcement| %>
+  <%= announcement.created_at %>
+  <%= announcement.title %>
+  <%= announcement.content %>
+  <%= announcement.updated_at %>
+  <%= announcement.user %>
+<% end %>

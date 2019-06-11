@@ -25,9 +25,9 @@ class InvitationsController < ApplicationController
     @group = @invitation.group
     if params[:invitation][:accept]
       @group.users << current_user
-      @invitation.delete
+      @invitation.destroy
     else
-      @invitation.delete
+      @invitation.destroy
     end
     redirect_to groups_path
   end
