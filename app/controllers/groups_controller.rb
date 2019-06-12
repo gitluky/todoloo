@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
       redirect_to user_path(current_user)
     end
     @invitations = @group.invitations
+    @announcements = @group.announcements
   end
 
   def edit
@@ -40,7 +41,7 @@ class GroupsController < ApplicationController
   end
 
   private
-  
+
   def set_group
     @group = Group.find_by(id: params[:id])
   end

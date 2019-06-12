@@ -6,6 +6,14 @@ Invitations:<br />
   Sent to: <%= invitation.recipient.email %><br />
   Sent by: <%= invitation.sender.email %><br />
 <% end %>
+<% @announcements.each do |announcement| %>
+  <%= announcement.created_at %><br />
+  <%= announcement.title %><br />
+  <%= announcement.content %><br />
+  <%= announcement.updated_at %><br />
+  <%= announcement.user.email %><br />
+<% end %>
+<%= link_to 'Post an Announcement', new_group_announcement_path(@group) %><br />
 <%= link_to 'Edit', edit_group_path(@group) %><br />
 <%= link_to 'Delete Group', group_path(@group), method: 'delete', data: { confirm: 'Are you sure?' }%><br />
 <%= link_to 'Send Invitation', new_group_invitation_path(@group) %>
