@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
     end
     @invitations = @group.invitations
     @announcements = @group.announcements
+    @tasks = @group.tasks
   end
 
   def edit
