@@ -8,6 +8,6 @@ class Group < ApplicationRecord
 
   has_one_attached :image
 
-  scope :has_member, ->(user_id) { joins(:memberships).where(memberships: { user_id: user_id} ) }
+  scope :has_member, ->(user) { joins(:memberships).where(memberships: { user_id: user.id })}
 
 end

@@ -6,6 +6,7 @@ Invitations:<br />
   Sent to: <%= invitation.recipient.email %><br />
   Sent by: <%= invitation.sender.email %><br />
 <% end %>
+Announcements:<br />
 <% @announcements.each do |announcement| %>
   <%= announcement.created_at %><br />
   <%= announcement.title %><br />

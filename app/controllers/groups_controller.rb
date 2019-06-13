@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :validate_logged_in, :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups = Group.has_member(current_user.id)
+    @groups = Group.has_member(current_user)
   end
 
   def new
