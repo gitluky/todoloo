@@ -1,27 +1,88 @@
-<%= display_banner(@group) %><br />
-<%= @group.name %><br />
-<%= @group.description %><br />
-Invitations:<br />
-<% @invitations.each do |invitation| %>
-  Sent to: <%= invitation.recipient.email %><br />
-  Sent by: <%= invitation.sender.email %><br />
+<%= tag.div class: 'text-center' do %>
+  <%= display_banner(@group) %><br />
+  <%= tag.h2 @group.name, class: 'mt-3' %><br />
+  <%= tag.p @group.description, class: 'mt-n3' %><br />
 <% end %>
-Announcements:<br />
-<% @announcements.each do |announcement| %>
-  <%= announcement.created_at %><br />
-  <%= announcement.title %><br />
-  <%= announcement.content %><br />
-  <%= announcement.updated_at %><br />
-  <%= announcement.user.email %><br />
+
+<ul class="mt-n4 nav nav-pills justify-content-center">
+  <% if logged_in? %>
+    <li class="nav-item">
+      <%= link_to 'Post an Announcement', new_group_announcement_path(@group), class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Send Invitation', new_group_invitation_path(@group), class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= root_path %>">Home</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<%= new_group_task_path(@group) %>" role="button" aria-haspopup="true" aria-expanded="false">Create Task</a>
+      <div class="dropdown-menu">
+        <%= form_for([@group, @task], html: { class: 'form-group' }) do |f| %>
+          <% content_tag(:div, class: 'form-group') %>
+            Name: <%= f.text_field :name, class: 'form-control' %>
+          <% content_tag(:div, class: 'form-group') %>
+            Description: <%= f.text_area :description, class: 'form-control' %>
+          <% content_tag(:div, class: 'form-group') %>
+            Assign to (optional): <%= f.collection_select(:assigned_to_id, @members, :id, :email, {}, html_options: { class: 'form-control'}) %>
+          <%=f.submit 'Create Task' %>
+        <% end %>
+      </div>
+    </li>
+  <% else %>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= login_path %>">Log In</a>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= tag.div class: 'row text-center mt-4' do %>
+  <%= tag.div class:'col-md-12' do %>
+    <% @announcements.each do |announcement| %>
+      <%= announcement.created_at %><br />
+      <%= announcement.title %><br />
+      <%= announcement.content %><br />
+      <%= announcement.updated_at %><br />
+      <%= announcement.user.email %><br />
+    <% end %>
+  <% end %>
 <% end %>
-Tasks: <br />
-<% @tasks.each do |task| %>
-  <%= task.name %><br />
-  <%= task.description %><br />
-  Created by: <%= task.creator_user_email %><br />
-  Assigned to: <%= task.assigned_user_email %><br />
+<%= tag.div class: 'row text-center mt-4' do %>
+  <%= tag.div class:'col-md-3' do %>
+    <%= tag.div class: 'text-right' do %>
+      Members:
+      <% @members.each do |member| %>
+        <%= tag.li class: 'mt-2' do %>
+          <%= member.email %><%= display_avatar(member, 'xs') %>
+        <% end %>
+      <% end %>
+      <% if !@invitations.empty? %>
+        Invitations:<br />
+        <% @invitations.each do |invitation| %>
+          Sent to: <%= invitation.recipient.email %><br />
+          Sent by: <%= invitation.sender.email %><br />
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= tag.div class:'col-md-9 text-left' do %>
+    Tasks: <br />
+    <% @tasks.each do |task| %>
+      <%= task.name %><br />
+      <%= task.description %><br />
+      Created by: <%= task.creator_user_email %><br />
+      Assigned to: <%= task.assigned_user_email %><br />
+      Status: <%= task.status %><br />
+    <% end %>
+  <% end %>
 <% end %>
-<%= link_to 'Create Task', new_group_task_path(@group) %><br />
+
+<%= link_to 'Create Task', new_group_task_path(@group), class: 'nav-link' %><br />
 <%= link_to 'Post an Announcement', new_group_announcement_path(@group) %><br />
 <%= link_to 'Edit', edit_group_path(@group) %><br />
 <%= link_to 'Delete Group', group_path(@group), method: 'delete', data: { confirm: 'Are you sure?' }%><br />

@@ -24,6 +24,8 @@ class GroupsController < ApplicationController
     @invitations = @group.invitations
     @announcements = @group.announcements
     @tasks = @group.tasks
+    @task = @group.tasks.build
+    @members = User.members_of_group(@group)
   end
 
   def edit
