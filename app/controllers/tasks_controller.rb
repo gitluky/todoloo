@@ -13,6 +13,10 @@ class TasksController < ApplicationController
     redirect_to group_path(@group)
   end
 
+  def show
+    @task = Task.find_by(id: params[:id])
+  end
+
   def edit
 
   end
@@ -23,6 +27,13 @@ class TasksController < ApplicationController
 
   def destroy
 
+  end
+
+  def assign
+    @task = Task.find_by(id: params[:id])
+    @task.assigned_to = current_user
+    @task.save
+    redirect_to group_path(@task.group)
   end
 
   private

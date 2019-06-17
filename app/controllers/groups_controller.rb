@@ -23,7 +23,9 @@ class GroupsController < ApplicationController
     end
     @invitations = @group.invitations
     @announcements = @group.announcements
-    @tasks = @group.tasks
+    @open_tasks = @group.tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
+    @assigned_tasks = @group.tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
+    @completed_tasks = @group.tasks.where(status: 'Completed')
     @task = @group.tasks.build
     @members = User.members_of_group(@group)
   end

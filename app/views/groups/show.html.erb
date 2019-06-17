@@ -40,19 +40,9 @@
 </ul>
 
 
+<%= tag.div class: 'container-fluid' do %>
 <%= tag.div class: 'row text-center mt-4' do %>
-  <%= tag.div class:'col-md-12' do %>
-    <% @announcements.each do |announcement| %>
-      <%= announcement.created_at %><br />
-      <%= announcement.title %><br />
-      <%= announcement.content %><br />
-      <%= announcement.updated_at %><br />
-      <%= announcement.user.email %><br />
-    <% end %>
-  <% end %>
-<% end %>
-<%= tag.div class: 'row text-center mt-4' do %>
-  <%= tag.div class:'col-md-3' do %>
+  <%= tag.div class:'col-md-2' do %>
     <%= tag.div class: 'text-right' do %>
       Members:
       <% @members.each do |member| %>
@@ -70,16 +60,90 @@
     <% end %>
   <% end %>
 
-  <%= tag.div class:'col-md-9 text-left' do %>
-    Tasks: <br />
-    <% @tasks.each do |task| %>
-      <%= task.name %><br />
-      <%= task.description %><br />
-      Created by: <%= task.creator_user_email %><br />
-      Assigned to: <%= task.assigned_user_email %><br />
-      Status: <%= task.status %><br />
+
+  <%= tag.div class:'col-md-3 text-left' do %>
+    <%= tag.div class:'card' do %>
+      <% @announcements.each do |announcement| %>
+        <%= tag.div class:'card-header' do %>
+          <%= announcement.created_at.strftime('%B, %d, %Y') %><br />
+        <% end %>
+        <%= tag.div class: 'card-body' do %>
+          <%= announcement.title %><br />
+          <%= announcement.content %><br />
+        <% end %>
+        <%= tag.div class: 'card-footer' do %>
+          <%= tag.small class: 'text-muted' do %>
+            <%= announcement.user.email %> @
+            <%= announcement.updated_at.strftime('%B, %d, %Y') %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
+
+
+
+  <%= tag.div class:'col-md-2 text-left' do %>
+    Open: <br />
+    <% @open_tasks.each do |task| %>
+      <%= tag.div class: 'card mb-2' do %>
+        <%= tag.div class: 'card-body' do %>
+          <%= tag.h5 class: 'card-title' do %>
+            <%= task.name %><br />
+          <% end %>
+          <%= tag.div class: 'card-text' do %>
+            <%= task.description %><br />
+            Created by: <%= task.creator_user_email %><br />
+
+            <%= link_to 'Volunteer', assign_user_path(task), method: 'post' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= tag.div class:'col-md-2 text-left' do %>
+    Assigned: <br />
+    <% @assigned_tasks.each do |task| %>
+      <%= tag.div class: 'card mb-2' do %>
+        <%= tag.div class: 'card-body' do %>
+          <%= tag.h5 class: 'card-title' do %>
+            <%= task.name %><br />
+          <% end %>
+          <%= tag.div class: 'card-text' do %>
+            <%= task.description %><br />
+            Created by: <%= task.creator_user_email %><br />
+            Assigned to: <%= task.assigned_user_email %><br />
+            Status: <%= task.status %><br />
+            <%= link_to 'View Task', task_path(task) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= tag.div class:'col-md-2 text-left' do %>
+    Completed: <br />
+    <% @completed_tasks.each do |task| %>
+      <%= tag.div class: 'card mb-2' do %>
+        <%= tag.div class: 'card-body' do %>
+          <%= tag.h5 class: 'card-title' do %>
+            <%= task.name %><br />
+          <% end %>
+          <%= tag.div class: 'card-text' do %>
+            <%= task.description %><br />
+            Created by: <%= task.creator_user_email %><br />
+            Assigned to: <%= task.assigned_user_email %><br />
+            Status: <%= task.status %><br />
+            <%= link_to 'View Task', task_path(task) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+<% end %>
 <% end %>
 
 <%= link_to 'Create Task', new_group_task_path(@group), class: 'nav-link' %><br />
