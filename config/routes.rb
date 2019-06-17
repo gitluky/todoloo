@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
   root 'application#index'
   resources :notes
-  resources :tasks
-  resources :announcements
+
+
 
   resources :users do
     resources :invitations
-    # resources :groups, only: [:index, :new, :create]
   end
 
   resources :groups do
     resources :invitations
     resources :tasks
     resources :announcements
+  end
+
+  resources :tasks do
+    resources :notes
   end
 
   get '/login', to: 'sessions#new'

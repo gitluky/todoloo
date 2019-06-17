@@ -1,10 +1,5 @@
 class TasksController < ApplicationController
 
-  def new
-    @group = Group.find_by(id: params[:group_id])
-    @task = @group.tasks.build
-  end
-
   def create
     @group = Group.find_by(id: params[:group_id])
     @task = @group.tasks.build(task_params)
@@ -15,6 +10,8 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find_by(id: params[:id])
+    @notes = @task.notes.where.not(id: nil)
+    @note = @task.notes.build
   end
 
   def edit
@@ -32,6 +29,7 @@ class TasksController < ApplicationController
   def assign
     @task = Task.find_by(id: params[:id])
     @task.assigned_to = current_user
+    @task.status = "Assigned"
     @task.save
     redirect_to group_path(@task.group)
   end

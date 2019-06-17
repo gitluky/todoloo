@@ -1,4 +1,19 @@
 <%= @task.name %><br />
+<%= @task.description %><br />
 Created by: <%= @task.creator_user_email %><br />
 Assigned to: <%= @task.assigned_user_email %><br />
 Status: <%= @task.status %><br />
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<%= new_task_note_path(@task) %>" role="button" aria-haspopup="true" aria-expanded="false">Add Note</a>
+  <div class="dropdown-menu">
+    <%= form_for([@task, @note], html: { class: 'form-group' }) do |f| %>
+        Content: <%= f.text_area :content, class: 'form-control' %>
+        <%=f.submit 'Create Note' %>
+    <% end %>
+  </div>
+</li>
+<% @notes.each do |note| %>
+  <%= note.content %><br />
+  <%= note.user.email %> @ <%= note.created_at %><br />
+
+<% end %>
