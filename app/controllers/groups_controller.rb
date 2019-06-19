@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   def create
     @group = current_user.groups.create(group_params)
     @group.last_edited_by = current_user
+    @group.announcements.create(title: 'Welcome!', content: 'Welcome to your new group! You can now start inviting members and creating tasks.')
     @group.save
     redirect_to groups_path
   end
@@ -23,7 +24,7 @@ class GroupsController < ApplicationController
     end
     @invitations = @group.invitations
     @announcements = @group.announcements
-    @open_tasks = @group.tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
+    @available_tasks = @group.tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
     @assigned_tasks = @group.tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
     @completed_tasks = @group.tasks.where(status: 'Completed')
     @task = @group.tasks.build

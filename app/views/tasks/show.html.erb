@@ -15,5 +15,18 @@ Status: <%= @task.status %><br />
 <% @notes.each do |note| %>
   <%= note.content %><br />
   <%= note.user.email %> @ <%= note.created_at %><br />
-
+  <ul class='nav nav-pills'>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<%= edit_task_note_path(@task, note) %>" role="button" aria-haspopup="true" aria-expanded="false">Edit Note</a>
+      <div class="dropdown-menu">
+        <%= form_for([@task, note], html: { class: 'form-group' }) do |f| %>
+            Content: <%= f.text_area :content, class: 'form-control' %>
+            <%=f.submit 'Update Note' %>
+        <% end %>
+      </div>
+    </li>
+    <li class='nav item'>
+      <%= link_to 'Delete Note', task_note_path(@task, note), method: 'delete', class: 'nav-link' %>
+    </li>
+  </ul>
 <% end %>
