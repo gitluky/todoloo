@@ -4,99 +4,59 @@
   <%= tag.p @group.description, class: 'mt-n3' %><br />
 <% end %>
 
-<ul class="mt-n4 nav nav-pills justify-content-center">
-  <% if logged_in? %>
-    <li class="nav-item">
-      <%= link_to 'Post an Announcement', new_group_announcement_path(@group), class: 'nav-link' %>
-    </li>
-    <li class="nav-item">
-      <%= link_to 'Send Invitation', new_group_invitation_path(@group), class: 'nav-link' %>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<%= root_path %>">Home</a>
-    </li>
-      <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Create Task', button_name: 'Create' } %>
-  <% else %>
-    <li class="nav-item">
-      <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<%= login_path %>">Log In</a>
-    </li>
-  <% end %>
-</ul>
+<%= tag.ul class: "mt-n4 nav nav-pills justify-content-center" do %>
+  <%= link_to 'Post an Announcement', new_group_announcement_path(@group), class: 'nav-item nav-link' %>
+  <%= link_to 'Send Invitation', new_group_invitation_path(@group), class: 'nav-item nav-link' %>
+  <%= render partial: 'new_task_dropdown', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Create Task', button_name: 'Create' } %>
+  <%= link_to 'Edit', edit_group_path(@group), class: 'nav-item nav-link' %><br />
+  <%= link_to 'Delete Group', group_path(@group), method: 'delete', class: 'nav-item nav-link', data: { confirm: 'Are you sure?' }%><br />
+<% end %>
 
 
 <%= tag.div class: 'container-fluid' do %>
-<%= tag.div class: 'row text-center mt-4' do %>
-  <%= tag.div class:'col-md-2' do %>
-    <%= tag.div class: 'text-right' do %>
-      Members:
-      <% @members.each do |member| %>
-        <%= tag.li class: 'mt-2' do %>
-          <%= member.email %><%= display_avatar(member, 'xs') %>
+  <%= tag.div class: 'row text-center mt-4' do %>
+    <%= tag.div class:'col-md-2' do %>
+      <%= tag.div class: 'text-right' do %>
+        Members:
+        <% @members.each do |member| %>
+          <%= tag.li class: 'mt-2' do %>
+            <%= member.email %><%= display_avatar(member, 'xs') %>
+          <% end %>
         <% end %>
-      <% end %>
-      <% if !@invitations.empty? %>
-        Invitations:<br />
-        <% @invitations.each do |invitation| %>
-          Sent to: <%= invitation.recipient.email %><br />
-          Sent by: <%= invitation.sender.email %><br />
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-
-  <%= tag.div class:'col-md-3 text-left' do %>
-    <%= tag.div class:'card' do %>
-      <% @announcements.each do |announcement| %>
-        <%= tag.div class:'card-header' do %>
-          <%= tag.h5 announcement.created_at.strftime('%B, %d, %Y') %>
-        <% end %>
-        <%= tag.div class: 'card-body' do %>
-          <%= tag.h5 announcement.title %>
-          <%= announcement.content %>
-        <% end %>
-        <%= tag.div class: 'card-footer' do %>
-          <%= tag.small class: 'text-muted' do %>
-            <%= announcement.user.email if announcement.user %> @
-            <%= announcement.updated_at.strftime('%B, %d, %Y') %>
+        <% if !@invitations.empty? %>
+          Invitations:<br />
+          <% @invitations.each do |invitation| %>
+            Sent to: <%= invitation.recipient.email %><br />
+            Sent by: <%= invitation.sender.email %><br />
           <% end %>
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
 
 
-
-  <%= tag.div class:'col-md-2 text-left' do %>
-  Available: <br />
-    <% @available_tasks.each do |task| %>
-      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
+    <%= tag.div class:'col-md-3 text-left' do %>
+        <% @announcements.each do |announcement| %>
+        <%= tag.div class:'card mb-2' do %>
+          <%= tag.div class:'card-header' do %>
+            <%= tag.h5 announcement.created_at.strftime('%B, %d, %Y') %>
+          <% end %>
+          <%= tag.div class: 'card-body' do %>
+            <%= tag.h5 announcement.title %>
+            <%= announcement.content %>
+          <% end %>
+          <%= tag.div class: 'card-footer' do %>
+            <%= tag.small class: 'text-muted' do %>
+              <%= announcement.user.email if announcement.user %> @
+              <%= announcement.updated_at.strftime('%B, %d, %Y') %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
+
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @available_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Available:' } %>
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @assigned_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Assigned:' } %>
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed:' } %>
+
   <% end %>
-
-  <%= tag.div class:'col-md-2 text-left' do %>
-    Assigned: <br />
-    <% @assigned_tasks.each do |task| %>
-      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
-    <% end %>
-  <% end %>
-
-  <%= tag.div class:'col-md-2 text-left' do %>
-    Completed: <br />
-    <% @completed_tasks.each do |task| %>
-      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
-    <% end %>
-  <% end %>
-
-
 <% end %>
-<% end %>
-
-<%= link_to 'Create Task', new_group_task_path(@group), class: 'nav-link' %><br />
-<%= link_to 'Post an Announcement', new_group_announcement_path(@group) %><br />
-<%= link_to 'Edit', edit_group_path(@group) %><br />
-<%= link_to 'Delete Group', group_path(@group), method: 'delete', data: { confirm: 'Are you sure?' }%><br />
-<%= link_to 'Send Invitation', new_group_invitation_path(@group) %>
