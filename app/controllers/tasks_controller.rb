@@ -15,15 +15,22 @@ class TasksController < ApplicationController
   end
 
   def edit
-
+    @group = Note.find_by(id: params[:group_id])
+    @task = Task.find_by(id: params[:id])
   end
 
   def update
-
+    @group = Group.find_by(id: params[:group_id])
+    @task = @group.tasks.find_by(id: params[:id])
+    @task.update(task_params)
+    redirect_to group_path(@group)
   end
 
   def destroy
-
+    @task = Task.find_by(id: params[:id])
+    @group = @task.group
+    @task.destroy
+    redirect_to group_path(@group)
   end
 
   def assign

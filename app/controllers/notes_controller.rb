@@ -16,7 +16,6 @@ class NotesController < ApplicationController
   def update
     @task = Task.find_by(id: params[:task_id])
     @note = Note.find_by(id: params[:id])
-    binding.pry
     @note.update(note_params)
     redirect_to task_path(@task)
   end

@@ -15,20 +15,7 @@
     <li class="nav-item">
       <a class="nav-link" href="<%= root_path %>">Home</a>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<%= new_group_task_path(@group) %>" role="button" aria-haspopup="true" aria-expanded="false">Create Task</a>
-      <div class="dropdown-menu">
-        <%= form_for([@group, @task], html: { class: 'form-group' }) do |f| %>
-          <% content_tag(:div, class: 'form-group') %>
-            Name: <%= f.text_field :name, class: 'form-control' %>
-          <% content_tag(:div, class: 'form-group') %>
-            Description: <%= f.text_area :description, class: 'form-control' %>
-          <% content_tag(:div, class: 'form-group') %>
-            Assign to (optional): <%= f.collection_select(:assigned_to_id, @members, :id, :email, include_blank: true, html_options: { class: 'form-control'}) %>
-          <%=f.submit 'Create Task' %>
-        <% end %>
-      </div>
-    </li>
+      <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Create Task', button_name: 'Create' } %>
   <% else %>
     <li class="nav-item">
       <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
@@ -96,6 +83,7 @@
             Created by: <%= task.creator_user_email %><br />
             <%= link_to 'View Task', task_path(task) %>
             <%= link_to 'Volunteer', assign_user_path(task), method: 'post' %>
+            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
           <% end %>
         <% end %>
       <% end %>
@@ -116,6 +104,7 @@
             Assigned to: <%= task.assigned_user_email %><br />
             Status: <%= task.status %><br />
             <%= link_to 'View Task', task_path(task) %>
+            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
           <% end %>
         <% end %>
       <% end %>
@@ -136,6 +125,7 @@
             Assigned to: <%= task.assigned_user_email %><br />
             Status: <%= task.status %><br />
             <%= link_to 'View Task', task_path(task) %>
+            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
           <% end %>
         <% end %>
       <% end %>
