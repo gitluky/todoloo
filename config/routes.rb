@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   post '/assign/:id', to: 'tasks#assign', as: 'assign_user'
+  post '/unassign/:id', to: 'tasks#unassign', as: 'unassign_user'
 
   get '/auth/facebook/callback', to: 'sessions#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

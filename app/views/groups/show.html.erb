@@ -73,62 +73,21 @@
   <%= tag.div class:'col-md-2 text-left' do %>
   Available: <br />
     <% @available_tasks.each do |task| %>
-      <%= tag.div class: 'card mb-2' do %>
-        <%= tag.div class: 'card-body' do %>
-          <%= tag.h5 class: 'card-title' do %>
-            <%= task.name %><br />
-          <% end %>
-          <%= tag.div class: 'card-text' do %>
-            <%= task.description %><br />
-            Created by: <%= task.creator_user_email %><br />
-            <%= link_to 'View Task', task_path(task) %>
-            <%= link_to 'Volunteer', assign_user_path(task), method: 'post' %>
-            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
     <% end %>
   <% end %>
 
   <%= tag.div class:'col-md-2 text-left' do %>
     Assigned: <br />
     <% @assigned_tasks.each do |task| %>
-      <%= tag.div class: 'card mb-2' do %>
-        <%= tag.div class: 'card-body' do %>
-          <%= tag.h5 class: 'card-title' do %>
-            <%= task.name %><br />
-          <% end %>
-          <%= tag.div class: 'card-text' do %>
-            <%= task.description %><br />
-            Created by: <%= task.creator_user_email %><br />
-            Assigned to: <%= task.assigned_user_email %><br />
-            Status: <%= task.status %><br />
-            <%= link_to 'View Task', task_path(task) %>
-            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
     <% end %>
   <% end %>
 
   <%= tag.div class:'col-md-2 text-left' do %>
     Completed: <br />
     <% @completed_tasks.each do |task| %>
-      <%= tag.div class: 'card mb-2' do %>
-        <%= tag.div class: 'card-body' do %>
-          <%= tag.h5 class: 'card-title' do %>
-            <%= task.name %><br />
-          <% end %>
-          <%= tag.div class: 'card-text' do %>
-            <%= task.description %><br />
-            Created by: <%= task.creator_user_email %><br />
-            Assigned to: <%= task.assigned_user_email %><br />
-            Status: <%= task.status %><br />
-            <%= link_to 'View Task', task_path(task) %>
-            <%= render partial: 'task_dropdown_form', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render partial: 'task_card', locals: { group: @group, task: task, members: @members, dropdown_name: 'Edit', button_name: 'Update' } %>
     <% end %>
   <% end %>
 

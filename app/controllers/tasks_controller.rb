@@ -41,6 +41,14 @@ class TasksController < ApplicationController
     redirect_to group_path(@task.group)
   end
 
+  def unassign
+    @task = Task.find_by(id: params[:id])
+    @task.assigned_to = nil
+    @task.status = "Available"
+    @task.save
+    redirect_to group_path(@task.group)
+  end
+
   private
 
   def task_params
