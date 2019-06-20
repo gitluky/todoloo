@@ -34,7 +34,7 @@
     <% end %>
 
 
-    <%= tag.div class:'col-md-3 text-left' do %>
+    <%= tag.div class:'col-lg-3 text-left' do %>
         <% @announcements.each do |announcement| %>
         <%= tag.div class:'card mb-2' do %>
           <%= tag.div class:'card-header' do %>
@@ -54,9 +54,9 @@
       <% end %>
     <% end %>
 
-  <%= render partial: 'task_column', locals: { group: @group, tasks: @available_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Available:' } %>
-  <%= render partial: 'task_column', locals: { group: @group, tasks: @assigned_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Assigned:' } %>
-  <%= render partial: 'task_column', locals: { group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed:' } %>
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @available_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Available' } %>
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @assigned_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Assigned' } %>
+  <%= render partial: 'task_column', locals: { group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed' } %>
 
   <% end %>
 <% end %>

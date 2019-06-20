@@ -1,5 +1,5 @@
-<%= tag.div class:'col-md-2 text-left' do %>
-  <%= title %>
+<%= tag.div class:'col-lg-2 text-left' do %>
+  <%= tasks_category_title(title, tasks) %>
   <% tasks.each do |task| %>
     <%= tag.div class: 'card mb-2' do %>
       <%= tag.div class: 'card-body' do %>
