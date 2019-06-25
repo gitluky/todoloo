@@ -54,9 +54,9 @@
       <% end %>
     <% end %>
 
-  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @available_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Available' } %>
-  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @assigned_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Assigned' } %>
-  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed' } %>
+  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @available_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Available', div_class: 'col-lg-2' } %>
+  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @assigned_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Assigned', div_class: 'col-lg-2' } %>
+  <%= render partial: 'task_column', locals: { edit_path: edit_group_task_path(@group), group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed', div_class: 'col-lg-2' } %>
 
   <% end %>
 <% end %>
