@@ -8,9 +8,6 @@ class Group < ApplicationRecord
 
   has_one_attached :image
 
-  scope :group_admins, ->(user) { joins(:memberships).where(memberships: { admin: true })}
-  scope :non_admins, ->(user) { joins(:memberships).where(memberships: { admin: false })}
-
   def recent_announcements
     self.announcements.where('created_at > ?', 1.week.ago)
   end
@@ -21,15 +18,15 @@ class Group < ApplicationRecord
 
   def make_admin(user)
     membership = memberships.where(user_id: user.id)
-    membership.admin = true
+    membership.first.admin = true
   end
 
   def admins
-    users.joins(:memberships).where(memberships: { admin: true })
+    User.joins(:memberships).where(memberships: { group: self, admin: true })
   end
 
   def non_admins
-    users.joins(:memberships).where(memberships: { admin: false })
+    User.joins(:memberships).where(memberships: { group: self, admin: false })
   end
 
 end

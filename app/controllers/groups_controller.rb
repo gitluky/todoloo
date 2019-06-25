@@ -30,6 +30,8 @@ class GroupsController < ApplicationController
     @completed_tasks = @group.tasks.where(status: 'Completed')
     @task = @group.tasks.build
     @members = @group.users
+    @admins = @group.admins
+    @non_admins = @group.non_admins
   end
 
   def edit

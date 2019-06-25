@@ -8,8 +8,10 @@
   <%= link_to 'Post an Announcement', new_group_announcement_path(@group), class: 'nav-item nav-link' %>
   <%= link_to 'Send Invitation', new_group_invitation_path(@group), class: 'nav-item nav-link' %>
   <%= render partial: 'new_task_dropdown', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Create Task', button_name: 'Create' } %>
-  <%= link_to 'Edit', edit_group_path(@group), class: 'nav-item nav-link' %><br />
-  <%= link_to 'Delete Group', group_path(@group), method: 'delete', class: 'nav-item nav-link', data: { confirm: 'Are you sure?' }%><br />
+  <% if @admins.include?(current_user) %>
+    <%= link_to 'Edit', edit_group_path(@group), class: 'nav-item nav-link' %><br />
+    <%= link_to 'Delete Group', group_path(@group), method: 'delete', class: 'nav-item nav-link', data: { confirm: 'Are you sure?' }%><br />
+  <% end %>
 <% end %>
 
 
@@ -17,12 +19,20 @@
   <%= tag.div class: 'row text-center mt-4' do %>
     <%= tag.div class:'col-md-2' do %>
       <%= tag.div class: 'text-right' do %>
-        Members:
-        <% @members.each do |member| %>
+        <%= tag.p 'Admins:' %>
+        <% @admins.each do |admin| %>
           <%= tag.li class: 'mt-2' do %>
-            <%= member.email %><%= display_avatar(member, 'xs') %>
+            <%= admin.email %><%= display_avatar(admin, 'xs') %>
           <% end %>
         <% end %>
+        <%= tag.p 'Members:', class: 'mt-4' %>
+        <% @non_admins.each do |non_admin| %>
+          <%= tag.li class: 'mt-2' do %>
+            <%= non_admin.email %><%= display_avatar(non_admin, 'xs') %>
+          <% end %>
+        <% end %>
+
+
         <% if !@invitations.empty? %>
           Invitations:<br />
           <% @invitations.each do |invitation| %>
