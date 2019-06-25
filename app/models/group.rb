@@ -8,6 +8,14 @@ class Group < ApplicationRecord
 
   has_one_attached :image
 
-  scope :has_member, ->(user) { joins(:memberships).where(memberships: { user_id: user.id })}
+  scope :group_admins, ->(user) { joins(:memberships).where(memberships: { admin: true })}
+
+  def recent_announcements
+    self.announcements.where('created_at > ?', 1.week.ago)
+  end
+
+  def tasks_assigned_to_user(user)
+    self.tasks.where(assigned_to_id: user.id)
+  end
 
 end

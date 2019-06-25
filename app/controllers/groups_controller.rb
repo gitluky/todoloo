@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :validate_logged_in, :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups = Group.has_member(current_user)
+    @groups = current_user.groups
   end
 
   def new
@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
     @assigned_tasks = @group.tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
     @completed_tasks = @group.tasks.where(status: 'Completed')
     @task = @group.tasks.build
-    @members = User.members_of_group(@group)
+    @members = @group.users
   end
 
   def edit

@@ -1,4 +1,4 @@
-<%= tag.div class:'col-lg-2 text-left' do %>
+<%= tag.div class: 'col-lg-3 text-left' do %>
   <%= tasks_category_title(title, tasks) %>
   <% tasks.each do |task| %>
     <%= tag.div class: 'card mb-2' do %>
@@ -13,7 +13,7 @@
             <%= display_assignment_links(task) %>
             <%= link_to 'View Task', task_path(task), class: 'nav-item nav-link px-1' %>
             <%= tag.li class: "nav-item dropdown" do %>
-              <%= tag.a class: "nav-link dropdown-toggle px-2", data: { toggle: "dropdown" }, href: edit_group_task_path(group), role: "button", aria: { haspopup: "true", expanded: false } do %><%= dropdown_name %><% end %>
+              <%= tag.a class: "nav-link dropdown-toggle px-2", data: { toggle: "dropdown" }, href: edit_path, role: "button", aria: { haspopup: "true", expanded: false } do %><%= dropdown_name %><% end %>
               <%= tag.div class: "dropdown-menu" do %>
                 <%= form_for([group, task], html: { class: 'form-group' }) do |f| %>
                   <%= tag.div class: 'form-group' do %>

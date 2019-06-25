@@ -29,7 +29,7 @@ class InvitationsController < ApplicationController
     else
       @invitation.destroy
     end
-    redirect_to groups_path
+    redirect_to root_path
   end
 
   private
