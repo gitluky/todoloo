@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.create(group_params)
     @group.last_edited_by = current_user
     @group.announcements.create(title: 'Welcome!', content: 'Welcome to your new group! You can now start inviting members and creating tasks.')
+    @group.make_admin(current_user)
     @group.save
     redirect_to groups_path
   end
