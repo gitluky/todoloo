@@ -15,7 +15,7 @@ module GroupsHelper
   end
 
   def tasks_category_title(title_string, tasks_array)
-    title_string + " (#{tasks_array.count.to_s})" + ':'
+    tasks_array.count > 0? title_string + " (#{tasks_array.count.to_s})" + ':' : nil
   end
 
 end

@@ -8,8 +8,8 @@
         <% end %>
         <%= tag.div class: 'card-text' do %>
           <%= task.description %><br />
-          Created by: <%= task.creator_user_email %><br />
-          <%= tag.ul class: 'nav' do %>
+          Created by: <%= task.creator_user_email %>
+          <%= tag.ul class: 'nav justify-content-center' do %>
             <%= display_assignment_links(task) %>
             <%= link_to 'View Task', task_path(task), class: 'nav-item nav-link px-1' %>
             <%= tag.li class: "nav-item dropdown" do %>
