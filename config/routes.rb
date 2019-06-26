@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :invitations
     resources :tasks
     resources :announcements
+    post '/users/:id/create_admin', to: 'users#create_admin', as: 'create_admin'
+    post '/users/:id/delete_admin', to: 'users#delete_admin', as: 'delete_admin'
   end
 
   resources :tasks do

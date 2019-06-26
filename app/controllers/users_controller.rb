@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:edit, :show, :update, :destroy]
+  before_action :set_user, only: [:edit, :show, :update, :destroy, :create_admin, :delete_admin]
+  before_action :set_nested_group, only: [:create_admin, :delete_admin]
 
   def new
     @user = User.new
@@ -39,10 +40,24 @@ class UsersController < ApplicationController
     redirect_to login_path
   end
 
+  def create_admin
+    @user.make_admin_membership(@group)
+    redirect_to group_path(@group)
+  end
+
+  def delete_admin
+    @user.remove_admin_membership(@group)
+    redirect_to group_path(@group)
+  end
+
   private
 
   def set_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def set_nested_group
+    @group = Group.find_by(id: params[:group_id])
   end
 
   def user_params

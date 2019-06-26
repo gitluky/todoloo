@@ -26,4 +26,21 @@ class User < ApplicationRecord
     user
   end
 
+  def is_admin?(group)
+    memberships.where(group: group).first.admin
+  end
+
+  def make_admin_membership(group)
+    membership = memberships.where(group: group).first
+    membership.admin = true
+    membership.save
+  end
+
+  def remove_admin_membership(group)
+    membership = memberships.where(group: group).first
+    membership.admin = false
+    membership.save
+  end
+
+
 end

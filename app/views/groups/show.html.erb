@@ -22,12 +22,22 @@
         <%= tag.p 'Admins:' %>
         <% @admins.each do |admin| %>
           <%= tag.li class: 'mt-2' do %>
+            <% if current_user.is_admin?(@group) %>
+              <%= tag.small do %>
+                <%= link_to 'Remove Admin', group_delete_admin_path(@group, admin), class: 'mr-3', method: 'post' %>
+              <% end %>
+            <% end %>
             <%= admin.email %><%= display_avatar(admin, 'xs') %>
           <% end %>
         <% end %>
         <%= tag.p 'Members:', class: 'mt-4' %>
         <% @non_admins.each do |non_admin| %>
           <%= tag.li class: 'mt-2' do %>
+            <% if current_user.is_admin?(@group) %>
+              <%= tag.small do %>
+                <%= link_to 'Make Admin', group_create_admin_path(@group, non_admin), class: 'mr-3', method: 'post' %>
+              <% end %>
+            <% end %>
             <%= non_admin.email %><%= display_avatar(non_admin, 'xs') %>
           <% end %>
         <% end %>
