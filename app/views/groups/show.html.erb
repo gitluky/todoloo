@@ -8,7 +8,7 @@
   <%= link_to 'Post an Announcement', new_group_announcement_path(@group), class: 'nav-item nav-link' %>
   <%= link_to 'Send Invitation', new_group_invitation_path(@group), class: 'nav-item nav-link' %>
   <%= render partial: 'new_task_dropdown', locals: { group: @group, task: @task, members: @members, dropdown_name: 'Create Task', button_name: 'Create' } %>
-  <% if @admins.include?(current_user) %>
+  <% if current_user.is_admin?(@group) %>
     <%= link_to 'Edit', edit_group_path(@group), class: 'nav-item nav-link' %><br />
     <%= link_to 'Delete Group', group_path(@group), method: 'delete', class: 'nav-item nav-link', data: { confirm: 'Are you sure?' }%><br />
   <% end %>

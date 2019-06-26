@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def is_admin?(group)
-    memberships.where(group: group).first.admin
+    group.admins.include?(self)
   end
 
   def make_admin_membership(group)
