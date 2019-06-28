@@ -16,11 +16,6 @@ class Group < ApplicationRecord
     self.tasks.where(assigned_to_id: user.id)
   end
 
-  def make_admin(user)
-    membership = memberships.where(user_id: user.id)
-    membership.first.admin = true
-  end
-
   def admins
     User.joins(:memberships).where(memberships: { group: self, admin: true })
   end

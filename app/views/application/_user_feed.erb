@@ -9,7 +9,7 @@
   <%= tag.div class: 'row justify-content-center' do %>
 
     <% @invitations.each do |invitation| %>
-      <%= tag.div class: 'card mx-1' do %>
+      <%= tag.div class: 'card mx-1 text-center' do %>
         <%= tag.div class: 'card-body' do %>
           <%= tag.small class: 'my-0 text-muted' do %>
             You have been invited to:
@@ -19,7 +19,7 @@
             <%=invitation.group.name %><br />
           <% end %>
 
-          <%= tag.small class: 'text-muted' do %>
+          <%= tag.small class: 'text-muted ' do %>
             Sent By: <%= invitation.sender.name %>
           <% end %>
 

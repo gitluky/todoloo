@@ -23,7 +23,7 @@
         <% @admins.each do |admin| %>
           <%= tag.li class: 'mt-2' do %>
 
-            <%= admin.name %><%= display_avatar(admin, 'xs') %><br />
+            <%= admin.name %> <%= display_avatar(admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
               <%= tag.small class: 'mr-n3' do %>
                 <%= link_to 'Remove Admin', group_delete_admin_path(@group, admin), class: 'mr-3', method: 'post' %>
@@ -34,7 +34,7 @@
         <%= tag.p 'Members:', class: 'mt-4' %>
         <% @non_admins.each do |non_admin| %>
           <%= tag.li class: 'mt-2' do %>
-            <%= non_admin.name %><%= display_avatar(non_admin, 'xs') %><br />
+            <%= non_admin.name %> <%= display_avatar(non_admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
               <%= tag.small class: 'mr-n3' do %>
                 <%= link_to 'Make Admin', group_create_admin_path(@group, non_admin), class: 'mr-3', method: 'post' %>
@@ -47,7 +47,8 @@
         <% if !@invitations.empty? %>
           Invitations:<br />
           <% @invitations.each do |invitation| %>
-            Sent to: <%= invitation.recipient.name %><br />
+            Sent to:
+            <%= invitation.recipient.name %> <%= display_avatar(invitation.recipient, 'xs') %><br />
             Sent by: <%= invitation.sender.name %><br />
           <% end %>
         <% end %>
