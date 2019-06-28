@@ -9,7 +9,7 @@
         Description: <%= f.text_area :description, class: 'form-control' %>
       <% end %>
       <%= tag.div class: 'form-group' do %>
-        Assign to (optional): <%= f.collection_select(:assigned_to_id, members, :id, :email, include_blank: true, html_options: { class: 'form-control'}) %>
+        Assign to (optional): <%= f.collection_select(:assigned_to_id, members, :id, :name, include_blank: true, html_options: { class: 'form-control'}) %>
       <% end %>
       <%=f.submit button_name %>
     <% end %>

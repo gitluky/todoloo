@@ -22,23 +22,24 @@
         <%= tag.p 'Admins:' %>
         <% @admins.each do |admin| %>
           <%= tag.li class: 'mt-2' do %>
+
+            <%= admin.name %><%= display_avatar(admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
-              <%= tag.small do %>
+              <%= tag.small class: 'mr-n3' do %>
                 <%= link_to 'Remove Admin', group_delete_admin_path(@group, admin), class: 'mr-3', method: 'post' %>
               <% end %>
             <% end %>
-            <%= admin.email %><%= display_avatar(admin, 'xs') %>
           <% end %>
         <% end %>
         <%= tag.p 'Members:', class: 'mt-4' %>
         <% @non_admins.each do |non_admin| %>
           <%= tag.li class: 'mt-2' do %>
+            <%= non_admin.name %><%= display_avatar(non_admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
-              <%= tag.small do %>
+              <%= tag.small class: 'mr-n3' do %>
                 <%= link_to 'Make Admin', group_create_admin_path(@group, non_admin), class: 'mr-3', method: 'post' %>
               <% end %>
             <% end %>
-            <%= non_admin.email %><%= display_avatar(non_admin, 'xs') %>
           <% end %>
         <% end %>
 
@@ -46,8 +47,8 @@
         <% if !@invitations.empty? %>
           Invitations:<br />
           <% @invitations.each do |invitation| %>
-            Sent to: <%= invitation.recipient.email %><br />
-            Sent by: <%= invitation.sender.email %><br />
+            Sent to: <%= invitation.recipient.name %><br />
+            Sent by: <%= invitation.sender.name %><br />
           <% end %>
         <% end %>
       <% end %>
@@ -66,7 +67,7 @@
           <% end %>
           <%= tag.div class: 'card-footer' do %>
             <%= tag.small class: 'text-muted' do %>
-              <%= announcement.user.email if announcement.user %> @
+              <%= announcement.user.name if announcement.user %> @
               <%= announcement.updated_at.strftime('%B, %d, %Y') %>
             <% end %>
           <% end %>

@@ -8,7 +8,7 @@
         <% end %>
         <%= tag.div class: 'card-text' do %>
           <%= task.description %><br />
-          Created by: <%= task.creator_user_email %>
+          Created by: <%= task.creator_user_name %>
           <%= tag.ul class: 'nav justify-content-center' do %>
             <%= display_assignment_links(task) %>
             <%= link_to 'View Task', task_path(task), class: 'nav-item nav-link px-1' %>
@@ -23,7 +23,7 @@
                     Description: <%= f.text_area :description, class: 'form-control' %>
                   <% end %>
                   <%= tag.div class: 'form-group' do %>
-                    Assign to (optional): <%= f.collection_select(:assigned_to_id, members, :id, :email, include_blank: true, html_options: { class: 'form-control'}) %>
+                    Assign to (optional): <%= f.collection_select(:assigned_to_id, members, :id, :name, include_blank: true, html_options: { class: 'form-control'}) %>
                   <% end %>
                   <%=f.submit button_name %>
                 <% end %>

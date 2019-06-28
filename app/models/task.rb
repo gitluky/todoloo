@@ -8,12 +8,12 @@ class Task < ApplicationRecord
     !!self.assigned_to_id
   end
 
-  def assigned_user_email
-    User.find_by(id: self.assigned_to).try('email')
+  def assigned_user_name
+    User.find_by(id: self.assigned_to).try('name')
   end
 
-  def creator_user_email
-    User.find_by(id: self.created_by).try('email')
+  def creator_user_name
+    User.find_by(id: self.created_by).try('name')
   end
 
 end

@@ -58,7 +58,7 @@
               <% end %>
               <%= tag.div class: 'card-footer' do %>
                 <%= tag.small class: 'text-muted' do %>
-                  <%= announcement.user.email if announcement.user %> @
+                  <%= announcement.user.name if announcement.user %> @
                   <%= announcement.updated_at.strftime('%B, %d, %Y') %>
                 <% end %>
               <% end %>
