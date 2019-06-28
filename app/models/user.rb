@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
   validates :email, uniqueness: true
   has_secure_password
-  scope :members_of_group, -> (group) { joins(:memberships).where(memberships: { group_id: group.id })}
 
   def self.find_or_create_by_oauth(oauth_hash)
     user = User.find_or_create_by(email: oauth_hash['info']['email']) do |u|

@@ -1,9 +1,23 @@
-<h2>My Groups</h2>
-<%= link_to "Create Group", new_group_path %>
-<div>
-  <% @groups.each do |group| %>
-    <div>
-      <%= link_to group.name, group_path(group) %>
-    </div>
+<%= tag.div class: 'container-fluid' do %>
+  <%= tag.div class: 'row justify-content-center' do %>
+    <%= link_to "Create Group", new_group_path, class: 'btn btn-primary mt-5' %>
   <% end %>
-<div>
+  <% @groups.each do |group| %>
+    <%= tag.div class: 'row justify-content-center mt-4' do %>
+      <%= tag.div class: 'col-lg-8' do %>
+        <%= link_to group_path(group) do %>
+          <%= tag.div class: 'card mt-2 rounded' do %>
+            <%= image_tag (group.image), class: 'card-img-top'%>
+
+            <%= tag.div class: 'card-body text-center mt-n2' do %>
+              <%= tag.h4 group.name %>
+              <%= tag.p group.description %>
+            <% end %>
+
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% end %>
