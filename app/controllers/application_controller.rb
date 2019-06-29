@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include GroupsHelper
   include TasksHelper
+  
   def index
     if logged_in?
       @user = current_user

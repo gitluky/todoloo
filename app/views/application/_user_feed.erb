@@ -43,9 +43,11 @@
   <% @groups.each do |group| %>
     <%= tag.div class: 'row text-center mt-3 justify-content-center' do %>
       <%= tag.div class:'col-lg-8 text-center' do %>
-      <%= tag.div class: 'row justify-content-center' do %>
-        <%= tag.h3 group.name %>
-        <%= tag.small class: 'mt-2' do %><%= link_to 'View Group', group_path(group), class: 'ml-2' %><% end %>
+      <%= tag.div class: 'card justify-content-center' do %>
+        <%= tag.h3 group.name, class: 'mt-5 user-feed-group-bg' %>
+        <%= tag.small class: 'mt-2' do %>
+          <%= link_to 'View Group', group_path(group), class: 'ml-2' %>
+        <% end %>
       <% end %>
 
         <%= tag.div class: 'card mb-3' do %>

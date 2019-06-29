@@ -1,18 +1,20 @@
 <ul class="mt-3 nav nav-pills justify-content-center">
   <% if logged_in? %>
     <li class="nav-item">
-      <a class="nav-link mt-3" href="<%= root_path %>">Home</a>
+      <a class="nav-link mt-3" href="<%= root_path %>">Feed</a>
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<%= user_path(current_user) %>" role="button" aria-haspopup="true" aria-expanded="false"><%= display_avatar(current_user, "xs") %></a>
       <div class="dropdown-menu">
-        <%= link_to 'My Invitations', user_invitations_path(current_user), class: 'dropdown-item' %>
         <%= link_to 'My Groups', groups_path(current_user), class: 'dropdown-item' %>
-        <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item' %>
+        <%= link_to 'Update Account', edit_user_path(current_user), class: 'dropdown-item' %>
         <%= link_to 'Log Out', logout_path, class: 'dropdown-item' %>
       </div>
     </li>
   <% else %>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= root_path %>">Home</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
     </li>
