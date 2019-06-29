@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2019_06_12_202825) do
     t.datetime "updated_at", null: false
     t.integer "created_by_id"
     t.integer "assigned_to_id"
-    t.string "status", default: "Not Started"
+    t.string "status", default: "Available"
   end
 
   create_table "users", force: :cascade do |t|

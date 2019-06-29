@@ -6,12 +6,14 @@
         <%= tag.h5 class: 'card-title' do %>
           <%= task.name %><br />
         <% end %>
-        <%= tag.div class: 'card-text' do %>
+        <%= tag.div class: 'card-text', id: 'task_section' do %>
           <%= task.description %><br />
+          <%= task.assigned_to.name if task.assigned? %><br />
+          <%= task.status %><br />
           Created by: <%= task.creator_user_name %>
           <%= tag.ul class: 'nav justify-content-center' do %>
             <%= display_assignment_links(task) %>
-            <%= link_to 'View Task', task_path(task), class: 'nav-item nav-link px-1' %>
+            <%= link_to 'View', task_path(task), class: 'nav-item nav-link px-1' %>
             <%= tag.li class: "nav-item dropdown" do %>
               <%= tag.a class: "nav-link dropdown-toggle px-2", data: { toggle: "dropdown" }, href: edit_path, role: "button", aria: { haspopup: "true", expanded: false } do %><%= dropdown_name %><% end %>
               <%= tag.div class: "dropdown-menu" do %>
@@ -29,6 +31,9 @@
                 <% end %>
               <% end %>
             <% end %>
+
+            <%= display_completion_links(group, task) %>
+
           <% end %>
         <% end %>
       <% end %>
