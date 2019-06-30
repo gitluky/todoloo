@@ -13,7 +13,7 @@ class Group < ApplicationRecord
   end
 
   def tasks_assigned_to_user(user)
-    self.tasks.where(assigned_to_id: user.id)
+    self.tasks.where(assigned_to_id: user.id, status: 'Assigned')
   end
 
   def admins
