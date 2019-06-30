@@ -1,10 +1,8 @@
 
 <%= tag.div class: 'container-fluid' do %>
+
   <%= tag.div class: 'row justify-content-center' do %>
-    <%= link_to "Create Group", new_group_path, class: 'btn btn-primary mt-3' %>
-  <% end %>
-  <%= tag.div class: 'row justify-content-center' do %>
-    <%= tag.p 'Invitations' if !@invitations.empty? %>
+    <%= tag.h5 'Invitations:', class: 'mt-4' if !@invitations.empty? %>
   <% end %>
   <%= tag.div class: 'row justify-content-center' do %>
 
@@ -40,17 +38,22 @@
     <% end %>
   <% end %>
 
+  <%= tag.div class: 'row justify-content-center' do %>
+    <%= link_to "Create Group", new_group_path, class: 'btn btn-primary mt-3' %>
+  <% end %>
+
   <% @groups.each do |group| %>
     <%= tag.div class: 'row text-center mt-3 justify-content-center' do %>
       <%= tag.div class:'col-lg-8 text-center' do %>
-      <%= tag.div class: 'card justify-content-center' do %>
-        <%= tag.h3 group.name, class: 'mt-5 user-feed-group-bg' %>
-        <%= tag.small class: 'mt-2' do %>
-          <%= link_to 'View Group', group_path(group), class: 'ml-2' %>
-        <% end %>
-      <% end %>
+        <%= tag.div class: 'card bg-light text-center' do %>
+          <%= image_tag (group.image), class: 'card-img-top-short rounded-top'%>
 
-        <%= tag.div class: 'card mb-3' do %>
+          <%= tag.h2 group.name, class: 'mt-2 text-primary' %>
+
+          <%= tag.small class: 'mt-n2' do %>
+            <%= link_to 'View Group', group_path(group), class: 'ml-2' %>
+          <% end %>
+
           <% group.recent_announcements.each do |announcement| %>
 
             <%= tag.div class:'card mb-2' do %>
@@ -68,9 +71,9 @@
 
           <% end %>
 
-          <%= tag.div class: 'row justify-content-center' do %>
-            <%= render partial: 'groups/task_column', locals: { edit_path: edit_task_path(group), group: group, tasks: group.tasks_assigned_to_user(current_user), members: group.users, dropdown_name: 'Edit', button_name: 'Update', title: 'My Assigned Tasks', div_class: 'col-lg-3' } %>
-          <% end %>
+
+          <%= render partial: 'groups/task_column', locals: { edit_path: edit_task_path(group), group: group, tasks: group.tasks_assigned_to_user(current_user), members: group.users, dropdown_name: 'Edit', button_name: 'Update', title: 'My Assigned Tasks', div_class: 'col-lg-3' } %>
+
 
         <% end %>
       <% end %>
