@@ -1,7 +1,36 @@
-<%= form_for(group) do |f| %>
-  Name: <%= f.text_field :name %>
-  Description: <%= f.text_area :description %>
-  <%= image_tag url_for(group.image), class: 'group-banner' if group.image.attached? %><br />
-  Image: <%= f.file_field :image %>
-  <%= f.submit %>
+<%= tag.div class: 'containter text-center' do %>
+  <%= tag.div class: 'col-lg-6 mx-auto' do %>
+    <%= tag.h2 'Create a New Group', class: 'text-center mt-5' %>
+    <%= tag.div class: 'text-left mt-3' do %>
+
+      <%= form_for(group) do |f| %>
+
+        <%= tag.div class: 'form-group' do %>
+          <%= tag.label 'Name:' %>
+          <%= f.text_field :name, id: 'name', class: 'form-control' %>
+        <% end %>
+
+        <%= tag.div class: 'form-group' do %>
+          <%= tag.label 'Description: ' %>
+          <%= f.text_area :description, rows: '10', class: 'form-control' %>
+        <% end %>
+
+        <%= image_tag url_for(group.image), class: 'group-banner' if group.image.attached? %>
+
+        <%= tag.div class: 'text-center' do %>
+          <%= tag.div class: 'form-group' do %>
+            <%= tag.label 'Image: ' %>
+            <%= f.file_field :image %>
+          <% end %>
+
+          <%= tag.div class: 'form-group' do %>
+            <%= f.submit class: 'btn btn-primary' %>
+          <% end %>
+        <% end %>
+
+
+      <% end %>
+
+    <% end %>
+  <% end %>
 <% end %>
