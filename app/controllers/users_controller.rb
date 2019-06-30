@@ -20,10 +20,6 @@ class UsersController < ApplicationController
 
   end
 
-  def show
-    @groups = @user.groups
-  end
-
   def update
     [:password, :password_confirmation, :avatar].each {|x| params.delete(x) if x.blank?}
     if @user.update(user_params)
