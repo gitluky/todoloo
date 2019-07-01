@@ -17,3 +17,11 @@
 body {
   min-height: 100%;
 }
+
+#add_space {
+  padding-bottom: 10%;
+
+}
+#sticky-footer {
+  flex-shrink: none;
+}

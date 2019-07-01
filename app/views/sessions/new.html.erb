@@ -1,16 +1,16 @@
-<div class='col-md-4 mx-auto mt-5'>
-<%= form_tag login_path do %>
-  <div class="form-group">
-    <%= label_tag :email %>
-    <%= email_field_tag :email, nil, class: 'form-control', id: 'email' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :password %>
-    <%= password_field_tag :password, nil, class: 'form-control', id: 'password' %><br />
-    <%= link_to('Log in with Facebook!', '/auth/facebook') %><br />
-  </div>
+<%= tag.div class: 'col-md-4 mx-auto mt-5' do %>
+  <%= form_tag login_path do %>
+    <div class="form-group">
+      <%= label_tag :email %>
+      <%= email_field_tag :email, nil, class: 'form-control', id: 'email' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil, class: 'form-control', id: 'password' %><br />
+      <%= link_to('Log in with Facebook!', '/auth/facebook') %><br />
+    </div>
 
-<%= submit_tag 'Login' %>
+    <%= submit_tag 'Login' %>
 
+  <% end %>
 <% end %>
-<div>

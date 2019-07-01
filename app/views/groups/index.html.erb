@@ -7,7 +7,7 @@
       <%= tag.div class: 'col-lg-8' do %>
         <%= link_to group_path(group) do %>
           <%= tag.div class: 'card mt-2 rounded' do %>
-            <%= image_tag (group.image), class: 'card-img-top'%>
+            <%= image_tag (group.image), class: 'card-img-top' if group.image.attached? %>
 
             <%= tag.div class: 'card-body text-center mt-n2' do %>
               <%= tag.h4 group.name %>

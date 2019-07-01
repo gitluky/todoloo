@@ -26,6 +26,7 @@
             <%= admin.name %> <%= display_avatar(admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
               <%= tag.small class: 'mr-n3' do %>
+                <%= link_to 'Kick Member', group_kick_member_path(@group, admin), class: 'mr-2', method: 'post' %>
                 <%= link_to 'Remove Admin', group_delete_admin_path(@group, admin), class: 'mr-3', method: 'post' %>
               <% end %>
             <% end %>
@@ -37,6 +38,7 @@
             <%= non_admin.name %> <%= display_avatar(non_admin, 'xs') %><br />
             <% if current_user.is_admin?(@group) %>
               <%= tag.small class: 'mr-n3' do %>
+                <%= link_to 'Kick Member', group_kick_member_path(@group, non_admin), class: 'mr-2', method: 'post' %>
                 <%= link_to 'Make Admin', group_create_admin_path(@group, non_admin), class: 'mr-3', method: 'post' %>
               <% end %>
             <% end %>
@@ -47,9 +49,12 @@
         <% if !@invitations.empty? %>
           Invitations:<br />
           <% @invitations.each do |invitation| %>
-            Sent to:
-            <%= invitation.recipient.name %> <%= display_avatar(invitation.recipient, 'xs') %><br />
-            Sent by: <%= invitation.sender.name %><br />
+            <%= tag.li class: 'mt-2' do %>
+              <%= invitation.recipient.name %> <%= display_avatar(invitation.recipient, 'xs') %><br />
+              <%= tag.small class: 'text-muted' do %>
+                Sent by: <%= invitation.sender.name %><br />
+              <% end %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

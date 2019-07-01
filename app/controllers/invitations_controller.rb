@@ -1,10 +1,7 @@
 class InvitationsController < ApplicationController
 
-  def index
-    @invitations = current_user.received_invitations
-  end
-
-  def new
+def new
+    @users = User.all
     @group = Group.find_by(id: params[:group_id])
     @invitation = @group.invitations.build
   end
@@ -23,7 +20,7 @@ class InvitationsController < ApplicationController
   def destroy
     @invitation = Invitation.find_by(id: params[:id])
     @group = @invitation.group
-    if params[:invitation][:accept]
+    if !!params[:invitation][:accept]
       @group.users << current_user
       @invitation.destroy
     else

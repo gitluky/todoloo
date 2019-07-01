@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:edit, :show, :update, :destroy, :create_admin, :delete_admin]
-  before_action :set_nested_group, only: [:create_admin, :delete_admin]
+  before_action :set_user, only: [:edit, :show, :update, :destroy, :create_admin, :delete_admin, :kick]
+  before_action :set_nested_group, only: [:create_admin, :delete_admin, :kick]
 
   def new
     @user = User.new
@@ -42,6 +42,13 @@ class UsersController < ApplicationController
 
   def delete_admin
     @user.remove_admin_membership(@group)
+    redirect_to group_path(@group)
+  end
+
+  def kick
+    binding.pry
+    membership = Membership.find_by(group: @group, user: @user)
+    membership.destroy
     redirect_to group_path(@group)
   end
 

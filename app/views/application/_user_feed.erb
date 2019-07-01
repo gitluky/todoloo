@@ -46,7 +46,7 @@
     <%= tag.div class: 'row text-center mt-3 justify-content-center' do %>
       <%= tag.div class:'col-lg-8 text-center' do %>
         <%= tag.div class: 'card bg-light text-center' do %>
-          <%= image_tag (group.image), class: 'card-img-top-short rounded-top'%>
+          <%= image_tag (group.image), class: 'card-img-top-short rounded-top' if group.image.attached? %>
 
           <%= tag.h2 group.name, class: 'mt-2 text-primary' %>
 
