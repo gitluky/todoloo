@@ -1,12 +1,31 @@
 <%= tag.div class: 'containter text-center' do %>
   <%= form_for user do |f| %>
-    <%= display_avatar(user, 'large') %><br />
-    Username: <%= f.text_field :name, class: 'mt-3' %><br />
-    <% if user.provider.nil? %>
-      Email: <%= f.email_field :email, class: 'mt-3'  %><br />
-      Change Avatar: <%= f.file_field :avatar, class: 'mt-3'  %><br />
-      Password: <%= f.password_field :password, class: 'mt-3'  %><br />
-      Confirm Password: <%= f.password_field :password_confirmation, class: 'mt-3'  %><br />
+    <%= tag.div class: 'mt-5' do %>
+      <%= display_avatar(user, 'large') %><br />
+    <% end %>
+    <%= tag.div class: 'row justify-content-center mt-3' do %>
+      <%= tag.div class: 'col-1' do %>
+        <%= tag.div class: 'text-right' do %>
+          <%= f.label :username, class: 'mt-3' %> <br />
+          <% if user.provider.nil? %>
+            <%= f.label :name, class: 'mt-3' %> <br />
+            <%= f.label :avatar, class: 'mt-3' %> <br />
+            <%= f.label :password, class: 'mt-3' %> <br />
+            <%= f.label :password_confirmation, 'Confirmation', class: 'mt-3' %><br />
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= tag.div class: 'col-2' do %>
+        <%= tag.div class: 'text-left' do %>
+          <%= f.text_field :name, class: 'mt-3' %><br />
+          <% if user.provider.nil? %>
+            <%= f.email_field :email, class: 'mt-3'  %><br />
+            <%= f.file_field :avatar, class: 'mt-3'  %><br />
+            <%= f.password_field :password, class: 'mt-3'  %><br />
+            <%= f.password_field :password_confirmation, class: 'mt-3'  %><br />
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
     <%= f.submit button_name, class: 'btn btn-primary mt-3'  %>
   <% end %>
