@@ -32,6 +32,7 @@ class GroupsController < ApplicationController
     @members = @group.users
     @admins = @group.admins
     @non_admins = @group.non_admins
+
   end
 
   def edit

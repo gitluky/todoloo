@@ -53,6 +53,10 @@
               <%= invitation.recipient.name %> <%= display_avatar(invitation.recipient, 'xs') %><br />
               <%= tag.small class: 'text-muted' do %>
                 Sent by: <%= invitation.sender.name %><br />
+                <%= form_for([invitation.recipient, invitation], method: :delete) do |f| %>
+                  <%= f.hidden_field :accept, value: false %>
+                  <%= f.submit 'Cancel Invitation', class: 'remove-submit-btn-style text-primary' %><br />
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
