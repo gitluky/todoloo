@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def update
     [:password, :password_confirmation, :avatar].each {|x| params.delete(x) if x.blank?}
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to root_path, flash: { message: 'Updated Successfully.'}
     else
       render :edit, flash: { message: 'Update failed.'}
     end

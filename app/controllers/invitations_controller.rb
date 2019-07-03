@@ -7,6 +7,7 @@ def new
   end
 
   def create
+    @users = User.all
     @group = Group.find_by(id: params[:group_id])
     @invitation = @group.invitations.build(invitation_params)
     @invitation.sender = current_user

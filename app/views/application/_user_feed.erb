@@ -2,6 +2,7 @@
 
 
   <%= tag.div class: 'row justify-content-center' do %>
+    <%= tag.h3 flash[:message], class: 'text-success mt-3' %>
     <%= tag.h3 'Invitations' if !@invitations.empty? %>
   <% end %>
   <%= tag.div class: 'row justify-content-center' do %>
