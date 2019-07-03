@@ -12,16 +12,20 @@ class GroupsController < ApplicationController
 
   def create
     @group = current_user.groups.create(group_params)
-    @group.last_edited_by = current_user
-    @group.announcements.create(title: 'Welcome!', content: 'Welcome to your new group! You can now start inviting members and creating tasks.')
-    current_user.make_admin_membership(@group)
-    @group.save
-    redirect_to group_path(@group)
+    if @group.errors.empty?
+      @group.last_edited_by = current_user
+      @group.announcements.create(title: 'Welcome!', content: 'Welcome to your new group! You can now start inviting members and creating tasks.')
+      current_user.make_admin_membership(@group)
+      @group.save
+      redirect_to group_path(@group)
+    else
+      render :new
+    end
   end
 
   def show
     if @group.users.exclude?(current_user)
-      redirect_to user_path(current_user)
+      redirect_to root_path
     end
     @invitations = @group.invitations
     @announcements = @group.announcements

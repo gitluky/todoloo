@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2019_06_12_202825) do
     t.integer "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accept"
   end
 
   create_table "memberships", force: :cascade do |t|

@@ -1,6 +1,9 @@
 <%= tag.div class: 'containter text-center' do %>
   <%= tag.div class: 'col-lg-6 mx-auto' do %>
     <%= tag.h2 'Create a New Group', class: 'text-center mt-5' %>
+    <% @group.errors.full_messages.each do |message| %>
+      <%= tag.li message, class: 'text-danger' %>
+    <% end %>
     <%= tag.div class: 'text-left mt-3' do %>
 
       <%= form_for(group) do |f| %>

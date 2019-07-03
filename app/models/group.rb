@@ -8,6 +8,9 @@ class Group < ApplicationRecord
 
   has_one_attached :image
 
+  validates :name, presence: true
+  validates :description, presence: true
+
   def recent_announcements
     self.announcements.where('created_at > ?', 1.week.ago)
   end
