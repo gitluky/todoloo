@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
       redirect_to root_path
     end
     @invitations = @group.invitations
-    @announcements = @group.announcements
+    @announcements = @group.announcements.order({ created_at: :desc })
     @available_tasks = @group.tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
     @assigned_tasks = @group.tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
     @completed_tasks = @group.tasks.where(status: 'Completed')

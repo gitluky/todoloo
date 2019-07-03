@@ -30,3 +30,7 @@ body {
   border: 1px solid red;
   border-color: red;
 }
+
+textarea.form-control {
+  height: 260px !important;
+}
