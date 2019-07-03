@@ -17,16 +17,24 @@ def new
     end
   end
 
+  def accept
+    @invitation = Invitation.find_by(id: params[:id])
+    @group = @invitation.group
+    @group.users << current_user
+    @invitation.destroy
+    redirect_to root_path
+  end
+
   def destroy
     @invitation = Invitation.find_by(id: params[:id])
     @group = @invitation.group
-    if !!params[:invitation][:accept]
-      @group.users << current_user
+    if current_user.is_admin?(@group)
       @invitation.destroy
+      redirect_to group_path(@group)
     else
       @invitation.destroy
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   private

@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   end
 
   def kick
-    binding.pry
     membership = Membership.find_by(group: @group, user: @user)
     membership.destroy
     redirect_to group_path(@group)

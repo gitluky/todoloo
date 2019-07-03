@@ -22,15 +22,8 @@
           <% end %>
 
           <%= tag.div class: 'row justify-content-center mt-2' do %>
-            <%= form_for([@user, invitation], method: :delete) do |f| %>
-              <%= f.hidden_field :accept, value: true %>
-              <%= f.submit 'Accept'%>
-            <% end %>
-
-            <%= form_for([@user, invitation], method: :delete) do |f| %>
-              <%= f.hidden_field :accept, value: false %>
-              <%= f.submit 'Decline'%><br />
-            <% end %>
+            <%= link_to 'Accept', group_accept_invitation_path(invitation.group, invitation), class: 'btn btn-primary' %>
+            <%= link_to 'Decline', group_invitation_path(invitation.group, invitation), method: 'delete', class: 'btn btn-danger ml-2' %>
 
           <% end %>
         <% end %>
