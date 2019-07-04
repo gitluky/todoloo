@@ -1,5 +1,5 @@
 <%= tag.li class: "nav-item dropdown" do %>
-  <%= tag.a class: "nav-link dropdown-toggle px-2", data: { toggle: "dropdown" }, href: new_group_task_path(group), role: "button", aria: { haspopup: "true", expanded: false } do %><%= dropdown_name %><% end %>
+  <%= tag.a class: "nav-link dropdown-toggle px-2 w-50", data: { toggle: "dropdown" }, href: new_group_task_path(group), role: "button", aria: { haspopup: "true", expanded: false } do %><%= dropdown_name %><% end %>
   <%= tag.div class: "dropdown-menu" do %>
     <%= form_for([group, task], html: { class: 'form-group' }) do |f| %>
       <%= tag.div class: 'form-group' do %>
