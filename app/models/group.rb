@@ -12,7 +12,7 @@ class Group < ApplicationRecord
   validates :description, presence: true
 
   def recent_announcements
-    self.announcements.where('created_at > ?', 1.week.ago)
+    self.announcements.where('created_at > ?', 1.week.ago).order( created_at: :desc )
   end
 
   def tasks_assigned_to_user(user)
@@ -25,6 +25,22 @@ class Group < ApplicationRecord
 
   def non_admins
     User.joins(:memberships).where(memberships: { group: self, admin: false })
+  end
+
+  def available_tasks
+    tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
+  end
+
+  def assigned_tasks
+    tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
+  end
+
+  def completed_tasks
+    tasks.where(status: 'Completed')
+  end
+
+  def recent_completed_tasks
+    tasks.where(status: 'Completed').where('created_at > ?', 1.week.ago).order(updated_at: :desc)
   end
 
 end

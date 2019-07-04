@@ -12,6 +12,7 @@ class TasksController < ApplicationController
 
   def show
     @notes = @task.notes.where.not(id: nil)
+    @group = @task.group
     @note = @task.notes.build
   end
 
@@ -24,6 +25,10 @@ class TasksController < ApplicationController
     @group = Group.find_by(id: params[:group_id])
     @task = @group.tasks.find_by(id: params[:id])
     @task.update(task_params)
+    if !!@task.assigned_to_id
+      @task.status = 'Assigned'
+      @task.save
+    end
     redirect_to group_path(@task.group, anchor: 'task_section')
   end
 

@@ -20,6 +20,7 @@ User.create(email: 'pparker@gmail.com', name: 'SpiderMan', password: 'password')
 User.create(email: 'sstrange@gmail.com', name: 'DoctorStrange', password: 'password')
 User.create(email: 'bbarnes@gmail.com', name: 'Bucky', password: 'password')
 User.create(email: 'swilson@gmail.com', name: 'Falcon', password: 'password')
+User.create(email: 'slang@gmail.com', name: 'AntMan', password: 'password')
 
 User.create(email: 'pquill@gmail.com', name: 'Quill', password: 'password')
 User.create(email: 'gamora@gmail.com', name: 'Gamora', password: 'password')

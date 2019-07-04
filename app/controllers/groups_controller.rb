@@ -29,9 +29,9 @@ class GroupsController < ApplicationController
     end
     @invitations = @group.invitations
     @announcements = @group.announcements.order({ created_at: :desc })
-    @available_tasks = @group.tasks.where(assigned_to_id: nil).where.not(status: 'Completed')
-    @assigned_tasks = @group.tasks.where.not(assigned_to_id: nil).where.not(status: 'Completed')
-    @completed_tasks = @group.tasks.where(status: 'Completed')
+    @available_tasks = @group.available_tasks
+    @assigned_tasks = @group.assigned_tasks
+    @completed_tasks = @group.recent_completed_tasks
     @task = @group.tasks.build
     @members = @group.users
     @admins = @group.admins
