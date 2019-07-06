@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :invitations
+    get '/tasks/completed_tasks', to: 'tasks#completed_tasks', as: 'completed_tasks'
     resources :tasks
     resources :announcements
     post '/users/:id/create_admin', to: 'users#create_admin', as: 'create_admin'

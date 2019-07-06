@@ -1,0 +1,3 @@
+<%= tag.div class: 'row justify-content-center' do %>
+  <%= render partial: 'groups/task_column', locals: { group: @group, tasks: @completed_tasks, members: @members, dropdown_name: 'Edit', button_name: 'Update', title: 'Completed', div_class: 'col-lg-2' } %>
+<% end %>

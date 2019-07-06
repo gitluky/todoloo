@@ -10,6 +10,12 @@ class TasksController < ApplicationController
     redirect_to group_path(@task.group, anchor: 'task_section')
   end
 
+  def completed_tasks
+    @group = Group.find_by(id: params[:group_id])
+    @completed_tasks = @group.completed_tasks
+    @members = @group.users
+  end
+
   def show
     @notes = @task.notes.where.not(id: nil)
     @group = @task.group
