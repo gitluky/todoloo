@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
 
-  before_action :set_parent_group, only: [:index, :new, :create, :edit, :update]
+  before_action :set_parent_group, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :set_nested_announcement, only: [:edit, :update, :destroy]
 
   def index
@@ -23,7 +23,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-    @annoucemennt.update(announcement_params)
+    @announcement.update(announcement_params)
     redirect_to group_path(@group)
   end
 
