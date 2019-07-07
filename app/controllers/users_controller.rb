@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :show, :update, :destroy, :create_admin, :delete_admin, :kick]
   before_action :set_nested_group, only: [:create_admin, :delete_admin, :kick]
-
+  skip_before_action :redirect_if_not_logged_in, only: [:new, :create]
+  
   def new
     @user = User.new
   end
