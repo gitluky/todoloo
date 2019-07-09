@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
 
   before_action :set_task
-  before_action :set_note, only: [:edit, :update, :destroy, :edit_privileges]
-  before_action :edit_privileges, only: [:edit, :update, :destroy]
+  before_action :set_note, only: [:edit, :update, :destroy, :check_edit_privileges]
+  before_action :check_edit_privileges, only: [:edit, :update, :destroy]
 
   def create
     @note = @task.notes.build(note_params)
@@ -44,7 +44,7 @@ class NotesController < ApplicationController
     params.require(:note).permit(:content)
   end
 
-  def edit_privileges
+  def check_edit_privileges
     @group = @task.group
     if current_user != @note.user
       redirect_to task_path(@task), flash: { message: 'You do not have the rights to perform action.' }

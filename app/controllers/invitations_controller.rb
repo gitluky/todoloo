@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
 
   before_action :set_group
   before_action :set_invitation, only: [:accept, :destroy, :set_group]
-  before_action :edit_privileges, only: [:destroy]
+  before_action :check_edit_privileges, only: [:destroy]
 
   def new
     @users = User.all
@@ -49,7 +49,7 @@ class InvitationsController < ApplicationController
     end
   end
 
-  def edit_privileges
+  def check_edit_privileges
     if !current_user.is_admin?(@group) && current_user != @invitation.sender
       redirect_to group_path(@group), flash: { message: 'You do not have the rights to perform action.' }
     end
