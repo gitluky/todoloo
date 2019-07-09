@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :groups do
     resources :invitations, only: [:new, :create, :accept, :destroy]
     get '/tasks/completed_tasks', to: 'tasks#completed_tasks', as: 'completed_tasks'
-    resources :tasks
+    resources :tasks, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :announcements, only: [:index, :new, :edit, :update, :destroy]
     post '/users/:id/create_admin', to: 'users#create_admin', as: 'create_admin'
     post '/users/:id/delete_admin', to: 'users#delete_admin', as: 'delete_admin'

@@ -1,3 +1,7 @@
+<%= tag.div class: 'row justify-content-center' do %>
+  <%= tag.p flash[:message], class: 'text-danger mt-5' %>
+<% end %>
+
 <%= tag.div class: 'col-md-4 mx-auto mt-5' do %>
   <%= form_tag login_path do %>
     <%= tag.div class: "form-group" do %>

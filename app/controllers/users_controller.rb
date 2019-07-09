@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :show, :update, :destroy, :create_admin, :delete_admin, :kick]
   before_action :set_nested_group, only: [:create_admin, :delete_admin, :kick]
+  before_action :redirect_if_not_logged_in
   skip_before_action :redirect_if_not_logged_in, only: [:new, :create]
 
   def new
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, flash: { message: 'Welcome!'}
     else
-      redirect_to new_user_path
+      render :new
     end
   end
 

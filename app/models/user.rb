@@ -9,11 +9,12 @@ class User < ApplicationRecord
   has_many :groups, through: :memberships
   has_many :groups_edited, class_name: "Group", foreign_key: 'last_edited_by_id'
   has_one_attached :avatar
+  validates :name, :email, presence: true
   validates :email, uniqueness: true
   has_secure_password
 
   scope :group_admins, -> (group) { joins(:memberships).where(memberships: { group: group, admin: true })}
-  scope :non_group_admins, -> (group) { joins(:memberships).where(memberships: { group: self, admin: false })}
+  scope :non_group_admins, -> (group) { joins(:memberships).where(memberships: { group: group, admin: false })}
 
   def self.find_or_create_by_oauth(oauth_hash)
     user = User.find_or_create_by(email: oauth_hash['info']['email']) do |u|

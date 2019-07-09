@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to root_path
       else
-        redirect_to login_path
+        redirect_to login_path, flash: { message: 'Cannot find account with the credentials provided.'}
       end
     end
 
