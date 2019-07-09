@@ -4,8 +4,13 @@ class NotesController < ApplicationController
     @task = Task.find_by(id: params[:task_id])
     @note = @task.notes.build(note_params)
     @note.user = current_user
-    @note.save
-    redirect_to task_path(@task)
+    if @note.save
+      redirect_to task_path(@task), flash: { message: 'Note has been added.'}
+    else
+      @group = @task.group
+      @notes = @task.notes
+      render 'tasks/show'
+    end
   end
 
   def edit
@@ -17,14 +22,14 @@ class NotesController < ApplicationController
     @task = Task.find_by(id: params[:task_id])
     @note = Note.find_by(id: params[:id])
     @note.update(note_params)
-    redirect_to task_path(@task)
+    redirect_to task_path(@task), flash: { message: 'Task has been successfully updated.' }
   end
 
   def destroy
     @task = Task.find_by(id: params[:task_id])
     @note = @task.notes.find_by(id: params[:id])
     @note.destroy
-    redirect_to task_path(@task)
+    redirect_to task_path(@task), flash: { message: 'Note has been deleted.' }
   end
 
   private

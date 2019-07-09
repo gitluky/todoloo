@@ -12,7 +12,7 @@ class Group < ApplicationRecord
   validates :description, presence: true
 
   def recent_announcements
-    self.announcements.where('created_at > ?', 1.week.ago).order( created_at: :desc )
+    Announcement.posted_for_group_since(self.id, 1.week.ago).order( created_at: :desc ).limit(1)
   end
 
   def tasks_assigned_to_user(user)

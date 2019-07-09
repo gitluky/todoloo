@@ -9,11 +9,13 @@ class SessionsController < ApplicationController
   def create
     if oauth_hash = request.env['omniauth.auth']
       user = User.find_or_create_by_oauth(oauth_hash)
-      log_in(user)
+      session[:user_id] = user.id
+      redirect_to root_path
     else
       user = User.find_by(email: params[:email])
       if user.try(:authenticate, params[:password])
-        log_in(user)
+        session[:user_id] = user.id
+        redirect_to root_path
       else
         redirect_to login_path
       end

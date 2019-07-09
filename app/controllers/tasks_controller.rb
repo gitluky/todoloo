@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
 
-  before_action :set_task, only: [:show, :edit, :destroy, :assign, :unassign, :complete, :incomplete]
-
+  before_action :set_task, only: [:show, :edit, :destroy, :volunteer, :drop_task, :complete, :incomplete, :admin_or_creator]
+  before_action :admin_or_creator, only: [:edit, :update, :destroy]
+  before_action
   def create
     @group = Group.find_by(id: params[:group_id])
     @task = @group.tasks.build(task_params)
@@ -44,14 +45,14 @@ class TasksController < ApplicationController
     redirect_to group_path(@task.group, anchor: 'task_section')
   end
 
-  def assign
+  def volunteer
     @task.assigned_to = current_user
     @task.status = "Assigned"
     @task.save
     redirect_to group_path(@task.group, anchor: 'task_section')
   end
 
-  def unassign
+  def drop_task
     @task.assigned_to = nil
     @task.status = "Available"
     @task.save
@@ -79,5 +80,13 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find_by(id: params[:id])
   end
+
+  def admin_or_creator
+    @group = @task.group
+    if !current_user.is_admin?(@group) && current_user != @task.created_by
+      redirect_to group_path(@group)
+    end
+  end
+
 
 end

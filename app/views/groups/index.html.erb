@@ -1,5 +1,8 @@
 <%= tag.div class: 'container-fluid' do %>
   <%= tag.div class: 'row justify-content-center' do %>
+    <%= tag.h3 flash[:message], class: 'text-success mt-3' %>
+  <% end %>
+  <%= tag.div class: 'row justify-content-center' do %>
     <%= link_to "Create Group", new_group_path, class: 'btn btn-primary mt-3' %>
   <% end %>
   <% @groups.each do |group| %>
@@ -8,12 +11,10 @@
         <%= link_to group_path(group) do %>
           <%= tag.div class: 'card mt-2 rounded' do %>
             <%= image_tag (group.image), class: 'card-img-top' if group.image.attached? %>
-
             <%= tag.div class: 'card-body text-center mt-n2' do %>
               <%= tag.h4 group.name %>
               <%= tag.p group.description %>
             <% end %>
-
           <% end %>
         <% end %>
       <% end %>

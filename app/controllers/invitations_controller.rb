@@ -12,9 +12,9 @@ def new
     @invitation = @group.invitations.build(invitation_params)
     @invitation.sender = current_user
     if @invitation.save
-      redirect_to group_path(@group)
+      redirect_to group_path(@group), flash: { message: 'Invitation Sent.'}
     else
-      render :new
+      render :new, flash: { message: 'Invitation not sent.' }
     end
   end
 

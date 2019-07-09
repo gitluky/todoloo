@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  post '/assign/:id', to: 'tasks#assign', as: 'assign_user'
-  post '/unassign/:id', to: 'tasks#unassign', as: 'unassign_user'
+  post '/volunteer/:id', to: 'tasks#volunteer', as: 'volunteer'
+  post '/drop_task/:id', to: 'tasks#drop_task', as: 'drop_task'
   get '/tasks/:id/complete', to: 'tasks#complete', as: 'complete'
   get '/tasks/:id/incomplete', to: 'tasks#incomplete', as: 'incomplete'
 

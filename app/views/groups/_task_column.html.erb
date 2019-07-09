@@ -1,5 +1,5 @@
 <%= tag.div class: div_class do %>
-  <%= tasks_category_title(title, tasks) %>
+  <%=tag.p tasks_category_title(title, tasks) if current_page?(group_path(group)) %>
   <% tasks.each do |task| %>
     <%= tag.div class: 'card mb-2' do %>
       <%= tag.div class: 'card-body' do %>

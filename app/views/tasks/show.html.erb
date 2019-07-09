@@ -1,5 +1,9 @@
-<%= tag.div class: 'text-center' do %>
-  <%= tag.h3 @task.name, class: 'mt-5' %><br />
+<%= tag.div class: 'text-center mt-4' do %>
+  <% @note.errors.full_messages.each do |message| %>
+    <%= tag.li message, class: 'text-danger' %>
+  <% end %>
+  <%= tag.li flash[:message], class: 'text-success' %>
+  <%= tag.h3 @task.name, class: 'mt-4' %><br />
   <%= @task.description %><br />
   Created by: <%= @task.creator_user_name %><br />
   Assigned to: <%= @task.assigned_user_name %><br />
@@ -48,30 +52,32 @@
   <%= tag.div class: 'row justify-content-center mt-4' do %>
     <%= tag.div class: 'col-8' do %>
       <% @notes.each do |note| %>
-        <%= tag.div class: 'border rounded mt-2' do %>
-          <%= tag.p note.content, class: 'mt-4 mb-0' %>
-          <%= tag.small do %>
-            <%= note.user.name %> @ <%= note.created_at.strftime('%B, %d, %Y') %>
-          <% end %>
-          <% if current_user == note.user %>
-            <ul class='nav nav-pills justify-content-center'>
-              <li class="nav-item dropdown justify-content-center">
-                <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href: edit_task_note_path(@task, note), role: "button", aria: { haspopup: true, expanded: false } do %>
-                  Edit Note
-                <% end %>
-                <div class="dropdown-menu">
-                  <%= form_for([@task, note], html: { class: 'form-group' }) do |f| %>
-                      Content: <%= f.text_area :content, class: 'form-control' %>
-                      <%=f.submit 'Update Note' %>
+        <% if note.created_at %>
+          <%= tag.div class: 'border rounded mt-2' do %>
+            <%= tag.p note.content, class: 'mt-4 mb-0' %>
+            <%= tag.small do %>
+              <%= note.user.name %> @ <%= note.created_at.strftime('%B, %d, %Y') %>
+            <% end %>
+            <% if current_user == note.user %>
+              <ul class='nav nav-pills justify-content-center'>
+                <li class="nav-item dropdown justify-content-center">
+                  <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href: edit_task_note_path(@task, note), role: "button", aria: { haspopup: true, expanded: false } do %>
+                    Edit Note
                   <% end %>
-                </div>
-              </li>
-              <li class='nav item'>
-                <%= link_to 'Delete Note', task_note_path(@task, note), method: 'delete', class: 'nav-link' %>
-              </li>
-            </ul>
-          <% end %>
+                  <div class="dropdown-menu">
+                    <%= form_for([@task, note], html: { class: 'form-group' }) do |f| %>
+                        Content: <%= f.text_area :content, class: 'form-control' %>
+                        <%=f.submit 'Update Note' %>
+                    <% end %>
+                  </div>
+                </li>
+                <li class='nav item'>
+                  <%= link_to 'Delete Note', task_note_path(@task, note), method: 'delete', class: 'nav-link' %>
+                </li>
+              </ul>
+            <% end %>
 
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
