@@ -46,7 +46,7 @@ class NotesController < ApplicationController
 
   def edit_privileges
     @group = @task.group
-    if !current_user.is_admin?(@group) && current_user != @note.user
+    if current_user != @note.user
       redirect_to task_path(@task), flash: { message: 'You do not have the rights to perform action.' }
     end
   end

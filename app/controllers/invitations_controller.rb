@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
 
   before_action :set_group
-  before_action :set_invitation, only: [:accept, :destroy]
+  before_action :set_invitation, only: [:accept, :destroy, :set_group]
   before_action :edit_privileges, only: [:destroy]
 
   def new

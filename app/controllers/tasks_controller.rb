@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
 
+
+  before_action :set_task, only: [:show, :edit, :destroy, :volunteer, :drop_task, :complete, :incomplete, :edit_privileges, :set_group]
+  before_action :set_group
   before_action :validate_user_group_membership
   before_action :edit_privileges, only: [:edit, :update, :destroy]
-  before_action :set_task, only: [:show, :edit, :destroy, :volunteer, :drop_task, :complete, :incomplete, :admin_or_creator]
-  
+
   def create
-    @group = Group.find_by(id: params[:group_id])
+
     @task = @group.tasks.build(task_params)
     @task.created_by = current_user
     @task.save
@@ -13,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-    @group = Group.find_by(id: params[:group_id])
+
     @completed_tasks = @group.completed_tasks
     @members = @group.users
   end
@@ -30,46 +32,46 @@ class TasksController < ApplicationController
   end
 
   def update
-    @group = Group.find_by(id: params[:group_id])
+
     @task = @group.tasks.find_by(id: params[:id])
     @task.update(task_params)
     if !!@task.assigned_to_id
       @task.status = 'Assigned'
       @task.save
     end
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def destroy
-    @group = @task.group
+
     @task.destroy
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def volunteer
     @task.assigned_to = current_user
     @task.status = "Assigned"
     @task.save
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def drop_task
     @task.assigned_to = nil
     @task.status = "Available"
     @task.save
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def complete
     @task.status = 'Completed'
     @task.save
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def incomplete
     @task.status = 'Assigned'
     @task.save
-    redirect_to group_path(@task.group, anchor: 'task_section')
+    redirect_to group_path(@group, anchor: 'task_section')
   end
 
   private
@@ -82,8 +84,15 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: params[:id])
   end
 
+  def set_group
+    if params[:group_id]
+      @group = Group.find_by(id: params[:group_id])
+    else
+      @group = @task.group
+    end
+  end
+
   def edit_privileges
-    @group = @task.group
     if !current_user.is_admin?(@group) && current_user != @task.created_by
       redirect_to group_path(@group)
     end
