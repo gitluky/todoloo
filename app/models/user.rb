@@ -12,6 +12,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   has_secure_password
 
+  scope :group_admins, -> (group) { joins(:memberships).where(memberships: { group: group, admin: true })}
+  scope :non_group_admins, -> (group) { joins(:memberships).where(memberships: { group: self, admin: false })}
+
   def self.find_or_create_by_oauth(oauth_hash)
     user = User.find_or_create_by(email: oauth_hash['info']['email']) do |u|
       u.uid = oauth_hash['uid']

@@ -64,12 +64,6 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, :description, :image )
   end
 
-  def validate_user_group_membership
-    if @group.users.exclude?(current_user)
-      redirect_to root_path
-    end
-  end
-
   def validate_admin_user_actions
     if !current_user.is_admin?(@group)
       redirect_to group_path(@group), flash: { message: 'You do not have the rights to perform action.'}

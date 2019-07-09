@@ -23,3 +23,9 @@ def redirect_if_not_logged_in
     redirect_to login_path
   end
 end
+
+def validate_user_group_membership
+  if @group.users.exclude?(current_user)
+    redirect_to root_path
+  end
+end

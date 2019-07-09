@@ -20,11 +20,11 @@ class Group < ApplicationRecord
   end
 
   def admins
-    User.joins(:memberships).where(memberships: { group: self, admin: true })
+    User.group_admins(self)
   end
 
   def non_admins
-    User.joins(:memberships).where(memberships: { group: self, admin: false })
+    User.non_group_admins(self)
   end
 
   def available_tasks

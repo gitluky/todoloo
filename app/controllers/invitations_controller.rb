@@ -1,14 +1,16 @@
 class InvitationsController < ApplicationController
 
-def new
+  before_action :set_group
+  before_action :set_invitation, only: [:accept, :destroy]
+  before_action :edit_privileges, only: [:destroy]
+
+  def new
     @users = User.all
-    @group = Group.find_by(id: params[:group_id])
     @invitation = @group.invitations.build
   end
 
   def create
     @users = User.all
-    @group = Group.find_by(id: params[:group_id])
     @invitation = @group.invitations.build(invitation_params)
     @invitation.sender = current_user
     if @invitation.save
@@ -19,23 +21,14 @@ def new
   end
 
   def accept
-    @invitation = Invitation.find_by(id: params[:id])
-    @group = @invitation.group
     @group.users << current_user
     @invitation.destroy
     redirect_to root_path
   end
 
   def destroy
-    @invitation = Invitation.find_by(id: params[:id])
-    @group = @invitation.group
-    if current_user.is_admin?(@group)
-      @invitation.destroy
-      redirect_to group_path(@group)
-    else
-      @invitation.destroy
-      redirect_to root_path
-    end
+    @invitation.destroy
+    redirect_to group_path(@group)
   end
 
   private
@@ -43,5 +36,24 @@ def new
   def invitation_params
     params.require(:invitation).permit(:recipient_email, :group_id)
   end
+
+  def set_invitation
+    @invitation = Invitation.find_by(id: params[:id])
+  end
+
+  def set_group
+    if params[:group_id]
+      @group = Group.find_by(id: params[:group_id])
+    else
+      @group = @invitation.group
+    end
+  end
+
+  def edit_privileges
+    if !current_user.is_admin?(@group) && current_user != @invitation.sender
+      redirect_to group_path(@group), flash: { message: 'You do not have the rights to perform action.' }
+    end
+  end
+
 
 end
