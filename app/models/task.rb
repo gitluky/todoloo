@@ -16,4 +16,8 @@ class Task < ApplicationRecord
     User.find_by(id: self.created_by).try('name')
   end
 
+  def update_assignment(status)
+    self.status = 'Completed'
+    self.save
+  end
 end

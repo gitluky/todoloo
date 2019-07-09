@@ -1,6 +1,5 @@
 class AnnouncementsController < ApplicationController
 
-
   before_action :set_parent_group, only: [:index, :new, :create, :edit, :update, :destroy, :validate_user_group_membership]
   before_action :set_nested_announcement, only: [:edit, :update, :destroy]
   before_action :validate_user_group_membership

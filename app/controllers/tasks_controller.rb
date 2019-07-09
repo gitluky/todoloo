@@ -1,13 +1,11 @@
 class TasksController < ApplicationController
 
-
   before_action :set_task, only: [:show, :edit, :destroy, :volunteer, :drop_task, :complete, :incomplete, :check_edit_privileges, :set_group]
   before_action :set_group
   before_action :validate_user_group_membership
   before_action :check_edit_privileges, only: [:edit, :update, :destroy]
 
   def create
-
     @task = @group.tasks.build(task_params)
     @task.created_by = current_user
     @task.save
@@ -15,7 +13,6 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-
     @completed_tasks = @group.completed_tasks
     @members = @group.users
   end
@@ -27,17 +24,14 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @group = Note.find_by(id: params[:group_id])
 
   end
 
   def update
-
     @task = @group.tasks.find_by(id: params[:id])
     @task.update(task_params)
     if !!@task.assigned_to_id
-      @task.status = 'Assigned'
-      @task.save
+      @task.update_assignment('Assigned')
     end
     redirect_to group_path(@group, anchor: 'task_section')
   end
@@ -50,27 +44,23 @@ class TasksController < ApplicationController
 
   def volunteer
     @task.assigned_to = current_user
-    @task.status = "Assigned"
-    @task.save
+    @task.update_assignment("Assigned")
     redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def drop_task
     @task.assigned_to = nil
-    @task.status = "Available"
-    @task.save
+    @task.update_assignment("Available")
     redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def complete
-    @task.status = 'Completed'
-    @task.save
+    @task.update_assignment('Completed')
     redirect_to group_path(@group, anchor: 'task_section')
   end
 
   def incomplete
-    @task.status = 'Assigned'
-    @task.save
+    @task.update_assignment('Assigned')
     redirect_to group_path(@group, anchor: 'task_section')
   end
 
