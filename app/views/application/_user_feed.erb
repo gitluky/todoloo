@@ -34,10 +34,6 @@
     <% end %>
   <% end %>
 
-
-
-
-
   <% @groups.each do |group| %>
     <%= tag.div class: 'row text-center mt-3 justify-content-center' do %>
       <%= tag.div class:'col-lg-8 text-center' do %>
@@ -60,28 +56,17 @@
               <%= tag.div class: 'card-footer' do %>
                 <%= tag.small class: 'text-muted' do %>
                   <%= announcement.user.name if announcement.user %> @
-                  <%= announcement.updated_at.strftime('%B, %d, %Y') %>
+                  <%= last_updated(announcement) %>
                 <% end %>
               <% end %>
             <% end %>
 
           <% end %>
 
-
           <%= render partial: 'groups/task_column', locals: { edit_path: edit_task_path(group), group: group, tasks: group.tasks_assigned_to_user(current_user), members: group.users, dropdown_name: 'Edit', button_name: 'Update', title: '', div_class: 'card-group' } %>
-
 
         <% end %>
       <% end %>
     <% end %>
   <% end %>
-
-
-
-
-
-
-
-
-
 <% end %>

@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def create_admin
-    @user.make_admin_membership(@group)
+    @user.grant_admin_membership(@group)
     redirect_to group_path(@group)
   end
 

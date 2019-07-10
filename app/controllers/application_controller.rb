@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include GroupsHelper
   include TasksHelper
+  include AnnouncementsHelper
 
   before_action :redirect_if_not_logged_in
   skip_before_action :redirect_if_not_logged_in, only: [:index]

@@ -34,7 +34,7 @@ class User < ApplicationRecord
     group.admins.include?(self)
   end
 
-  def make_admin_membership(group)
+  def grant_admin_membership(group)
     membership = memberships.where(group: group).first
     membership.admin = true
     membership.save

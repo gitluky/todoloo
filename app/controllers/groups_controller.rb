@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
     if @group.valid?
       @group.last_edited_by = current_user
       @group.announcements.create(title: 'Welcome!', content: 'Welcome to your new group! You can now start inviting members and creating tasks.')
-      current_user.make_admin_membership(@group)
+      current_user.grant_admin_membership(@group)
       @group.save
       redirect_to group_path(@group), flash: { message: 'Your group has been created.' }
     else
