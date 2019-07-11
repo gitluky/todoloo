@@ -64,7 +64,7 @@
               <%= tag.small class: 'text-muted' do %>
                 Sent by: <%= invitation.sender.name %><br />
                 <% if current_user.is_admin?(@group) || current_user == invitation.sender %>
-                  <%= link_to 'Decline', group_invitation_path(invitation.group, invitation), method: 'delete' %>
+                  <%= link_to 'Cancel Invitation', group_invitation_path(invitation.group, invitation), method: 'delete' %>
                 <% end %>
               <% end %>
             <% end %>
