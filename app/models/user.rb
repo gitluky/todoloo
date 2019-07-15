@@ -46,5 +46,8 @@ class User < ApplicationRecord
     membership.save
   end
 
+  def groups_for_user_feed
+    self.groups.select {|group| Announcement.posted_for_group_since(group, 1.week.ago).any? || !group.tasks_assigned_to_user(self).empty? }
+  end
 
 end

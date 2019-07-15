@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if logged_in?
       @user = current_user
       @invitations = @user.received_invitations
-      @groups = @user.groups
+      @groups = @user.groups_for_user_feed
     end
   end
 

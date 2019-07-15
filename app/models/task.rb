@@ -17,7 +17,7 @@ class Task < ApplicationRecord
   end
 
   def update_assignment(status)
-    self.status = 'Completed'
+    self.status = status
     self.save
   end
 end
