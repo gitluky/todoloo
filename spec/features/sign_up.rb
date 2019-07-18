@@ -13,7 +13,7 @@ describe "user sign up" do
   end
 
   describe "successful user sign up", type: :feature do
-    
+
     let(:user) { User.find_by(email: "jsnow@gmail.com") }
 
     it "creates a new user account" do
