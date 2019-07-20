@@ -27,6 +27,6 @@ end
 
 def validate_user_group_membership
   if @group.users.exclude?(current_user)
-    redirect_to root_path
+    redirect_to root_path, flash: { message: 'You are not a member of the group you are trying to access.'}
   end
 end

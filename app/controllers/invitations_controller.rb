@@ -3,6 +3,7 @@ class InvitationsController < ApplicationController
   before_action :set_group
   before_action :set_invitation, only: [:accept, :destroy, :set_group]
   before_action :check_edit_privileges, only: [:destroy]
+  before_action :validate_user_group_membership, only: [:new, :create]
 
   def new
     @users = User.all

@@ -1,4 +1,4 @@
-module SessionHelpers
+module FeaturesHelpers
   def log_in_using_form(email, password)
     visit login_path
     fill_in 'email', with: email
@@ -12,4 +12,13 @@ module SessionHelpers
     fill_in 'group[description]', with: description
     click_button 'Create Group'
   end
+
+  def create_announcement_from_group_page(group, title, content)
+    visit group_path(group)
+    click_link 'Post an Announcement'
+    fill_in 'announcement[title]', with: title
+    fill_in 'announcement[content]', with: content
+    click_button 'Post Announcement'
+  end
+
 end

@@ -2,7 +2,7 @@
   <%= tag.h3 flash[:message], class: 'mt-3' %>
   <%= tag.ul class: "nav nav-pills justify-content-center mt-3 mb-2" do %>
     <% if current_user.is_admin?(@group) %>
-      <%= link_to 'Edit', edit_group_path(@group), class: 'nav-item nav-link btn btn-outline-primary mr-2' %><br />
+      <%= link_to 'Edit Group', edit_group_path(@group), class: 'nav-item nav-link btn btn-outline-primary mr-2' %><br />
       <%= link_to 'Delete Group', group_path(@group), method: 'delete', class: 'nav-item nav-link btn btn-outline-danger', data: { confirm: 'Are you sure?' }%><br />
     <% end %>
   <% end %>
