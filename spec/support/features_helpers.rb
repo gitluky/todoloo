@@ -21,4 +21,12 @@ module FeaturesHelpers
     click_button 'Post Announcement'
   end
 
+  def send_an_invitation(group, user)
+    visit group_path(group)
+    click_link 'Send an Invitation'
+    expect(current_path).to eq(new_group_invitation_path(group))
+    fill_in 'invitation[recipient_email]', with: user.email
+    click_button 'Send Invite'
+  end
+
 end

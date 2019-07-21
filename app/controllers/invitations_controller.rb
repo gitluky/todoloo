@@ -24,12 +24,17 @@ class InvitationsController < ApplicationController
   def accept
     @group.users << current_user
     @invitation.destroy
-    redirect_to root_path
+    redirect_to group_path(@group)
   end
 
   def destroy
-    @invitation.destroy
-    redirect_to group_path(@group)
+    if @group.users.include?(current_user)
+      @invitation.destroy
+      redirect_to group_path(@group)
+    else
+      @invitation.destroy
+      redirect_to root_path
+    end
   end
 
   private
@@ -51,7 +56,7 @@ class InvitationsController < ApplicationController
   end
 
   def check_edit_privileges
-    if !current_user.is_admin?(@group) && current_user != @invitation.sender
+    if !current_user.is_admin?(@group) && current_user != @invitation.sender && current_user != @invitation.recipient
       redirect_to group_path(@group), flash: { message: 'You do not have the rights to perform action.' }
     end
   end
