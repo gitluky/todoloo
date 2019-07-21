@@ -29,4 +29,12 @@ module FeaturesHelpers
     click_button 'Send Invite'
   end
 
+  def create_task_from_group_page(group, name, description)
+    visit group_path(group)
+    click_link 'Create Task'
+    fill_in 'task[name]', with: name
+    fill_in 'task[description]', with: description
+    click_button 'Create'
+  end
+
 end
