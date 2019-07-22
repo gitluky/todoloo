@@ -13,7 +13,7 @@
     <%= display_completion_links(@task.group, @task) %>
 
     <%= tag.li class: "nav-item dropdown" do %>
-      <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href: new_task_note_path(@task), role: "button", aria: { haspopup: true, expanded: false } do %>
+      <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href: '#', role: "button", aria: { haspopup: true, expanded: false } do %>
         Add Note
       <% end %>
       <%= tag.div class: "dropdown-menu" do %>
@@ -61,7 +61,7 @@
             <% if current_user == note.user %>
               <ul class='nav nav-pills justify-content-center'>
                 <li class="nav-item dropdown justify-content-center">
-                  <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href: edit_task_note_path(@task, note), role: "button", aria: { haspopup: true, expanded: false } do %>
+                  <%= tag.a class: "nav-link dropdown-toggle", data: { toggle: "dropdown"}, href:'#', role: "button", aria: { haspopup: true, expanded: false } do %>
                     Edit Note
                   <% end %>
                   <div class="dropdown-menu">
