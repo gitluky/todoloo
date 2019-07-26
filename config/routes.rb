@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'application#index'
 
   resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
+
   resources :groups do
     resources :invitations, only: [:new, :create, :accept, :destroy]
     get '/tasks/completed_tasks', to: 'tasks#completed_tasks', as: 'completed_tasks'
@@ -26,5 +27,5 @@ Rails.application.routes.draw do
   get '/tasks/:id/incomplete', to: 'tasks#incomplete', as: 'incomplete'
 
   get '/auth/facebook/callback', to: 'sessions#create'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end
