@@ -8,7 +8,6 @@
 
 User.create(email: 'srogers@gmail.com', name: 'CaptainAmerica', password: 'password')
 User.create(email: 'nromanoff@gmail.com', name: 'BlackWidow', password: 'password')
-User.create(email: 'tstark@gmail.com', name: 'IronMan', password: 'password')
 User.create(email: 'thor@gmail.com', name: 'GodOfThunder', password: 'password')
 User.create(email: 'bbanner@gmail.com', name: 'StrongestAvenger', password: 'password')
 User.create(email: 'nfury@gmail.com', name: 'Fury', password: 'password')
