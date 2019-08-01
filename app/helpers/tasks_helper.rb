@@ -7,7 +7,7 @@ module TasksHelper
   def display_assignment_links(task)
     if !task.assigned?
       link_to('Volunteer', volunteer_path(task), method: 'post', class: 'nav-item nav-link px-2')
-    elsif task.assigned_to == current_user
+    elsif task.assigned_to == current_user && task.status != 'Completed'
       link_to('Drop', drop_task_path(task), method: 'post', class: 'nav-item nav-link px-2')
     end
   end

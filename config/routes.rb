@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :tasks do
-    resources :notes
+    resources :notes, only: [:new, :create, :edit, :update, :destroy]
   end
 
   get '/login', to: 'sessions#new'

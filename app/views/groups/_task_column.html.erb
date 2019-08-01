@@ -8,8 +8,8 @@
         <% end %>
         <%= tag.div class: 'card-text', id: 'task_section' do %>
           <%= task.description %><br />
-          <%= task.assigned_to.name if task.assigned? %><br />
-          <%= task.status %><br />
+          Assigned to: <%= task.assigned_to.name if task.assigned? %><br />
+          Status: <%= task.status %><br />
           Created by: <%= task.creator_user_name %>
           <%= tag.ul class: 'nav justify-content-center' do %>
             <%= display_assignment_links(task) %>
