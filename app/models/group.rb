@@ -11,6 +11,9 @@ class Group < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
+  scope :group_with_most_tasks_assigned_to_user, -> (user) { joins(:tasks).where( tasks: { assigned_to: user.id }).group('tasks.group_id').order('count(tasks.assigned_to_id) desc').first }
+  
+
   def recent_announcements
     Announcement.posted_for_group_since(self.id, 1.week.ago).order( created_at: :desc ).limit(1)
   end
@@ -42,5 +45,6 @@ class Group < ApplicationRecord
   def recent_completed_tasks
     tasks.where(status: 'Completed').where('updated_at > ?', 1.week.ago).order(updated_at: :desc)
   end
+
 
 end

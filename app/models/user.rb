@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   scope :group_admins, -> (group) { joins(:memberships).where(memberships: { group: group, admin: true })}
   scope :non_group_admins, -> (group) { joins(:memberships).where(memberships: { group: group, admin: false })}
+  scope :created_most_tasks, -> (group) { joins("INNER JOIN 'tasks' ON 'users'.'id' = 'tasks'.'created_by_id'").where( tasks: { group_id: group }).group('tasks.created_by_id').order('count(tasks.created_by_id) desc').first }
+  scope :created_most_recent_task, -> (group) { joins("INNER JOIN 'tasks' ON 'users'.'id' = 'tasks'.'created_by_id'").where( tasks: { group_id: group }).order('tasks.created_at desc').first }
 
   def self.find_or_create_by_oauth(oauth_hash)
     user = User.find_or_create_by(email: oauth_hash['info']['email']) do |u|
@@ -35,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def grant_admin_membership(group)
-    membership = memberships.where(group: group).first
+    membership = memberships.where(group_id: group.id).first
     membership.admin = true
     membership.save
   end
