@@ -4,7 +4,7 @@ ToDoLoo is a rails web app designed for easy task management. Once a user signs 
 
 Pre-requisites:
 
-Ruby 2.4.0 or higher Google Maps API key
+Ruby 2.4.0 or higher
 
 Installation
 
