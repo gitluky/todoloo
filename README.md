@@ -2,6 +2,8 @@ ToDoLoo
 
 ToDoLoo is a rails web app designed for easy task management. Once a user signs up with their email or via Facebook, they can create or join groups in which they are invited to, and within these groups, they can post group announcements, create tasks, assign the tasks, as well as leave notes under each task to keep the other group members updated.
 
+Demo: https://vimeo.com/350426567
+
 Pre-requisites:
 
 Ruby 2.4.0 or higher
