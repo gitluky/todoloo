@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.1'
+ruby '2.7.1'
 gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'

@@ -83,6 +83,7 @@ class TasksController < ApplicationController
   end
 
   def check_edit_privileges
+    set_task
     if !current_user.is_admin?(@group) && current_user != @task.created_by
       redirect_to group_path(@group)
     end

@@ -50,7 +50,7 @@ class AnnouncementsController < ApplicationController
 
   def check_edit_privileges
     @group = @announcement.group
-    if !current_user.is_admin?(@group) && current_user != @announcement.created_by
+    if !current_user.is_admin?(@group) && current_user != @announcement.user
       redirect_to group_path(@group)
     end
   end

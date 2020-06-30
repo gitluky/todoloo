@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :announcements
   has_many :received_invitations, class_name: "Invitation", foreign_key: 'recipient_id'
   has_many :sent_invitations, class_name: "Invitation", foreign_key: 'sender_id'
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :groups_edited, class_name: "Group", foreign_key: 'last_edited_by_id'
   has_one_attached :avatar

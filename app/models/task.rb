@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   belongs_to :group
   belongs_to :created_by, class_name: 'User'
   belongs_to :assigned_to, class_name: 'User', optional: true
-  has_many :notes
+  has_many :notes, dependent: :destroy
 
   def assigned?
     !!self.assigned_to_id
